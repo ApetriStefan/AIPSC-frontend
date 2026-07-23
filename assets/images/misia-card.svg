@@ -1,0 +1,34 @@
+<svg width="254" height="210" viewBox="0 0 254 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_dn_80_838)">
+<rect width="246" height="202" rx="4" fill="#CDD7D6"/>
+<rect x="0.5" y="0.5" width="245" height="201" rx="3.5" stroke="#A3AFAE"/>
+<text fill="#091413" style="white-space: pre" xml:space="preserve" font-family="Noto Sans" font-size="16" letter-spacing="0em"><tspan x="65.6406" y="32.208"> &#10;</tspan></text>
+<text fill="#091413" style="white-space: pre" xml:space="preserve" font-family="Noto Sans" font-size="14" letter-spacing="0em"><tspan x="16" y="56.208">Main International Shooting </tspan><tspan x="16" y="74.208">Instructors Association&#x201d; is the </tspan><tspan x="16" y="92.208">official instructor body of IPSC. </tspan><tspan x="16" y="110.208">Its main mission is to promote, </tspan><tspan x="16" y="128.208">maintain, and improve a </tspan><tspan x="16" y="146.208">worldwide standard of safety </tspan><tspan x="16" y="164.208">training and high-quality </tspan><tspan x="16" y="182.208">instruction in practical shooting </tspan></text>
+<text fill="#091413" style="white-space: pre" xml:space="preserve" font-family="Noto Sans" font-size="16" font-weight="500" letter-spacing="0em"><tspan x="16" y="32.208">MISIA:</tspan></text>
+</g>
+<defs>
+<filter id="filter0_dn_80_838" x="0" y="0" width="254" height="210" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="4" dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.0352941 0 0 0 0 0.0784314 0 0 0 0 0.0745098 0 0 0 0.08 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_80_838"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="4.5380125045776367 4.5380125045776367" stitchTiles="stitch" numOctaves="3" result="noise" seed="6110" />
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise" />
+<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+<feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped" />
+<feFlood flood-color="rgba(9, 20, 19, 0.25)" result="color1Flood" />
+<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1" />
+<feMerge result="effect2_noise_80_838">
+<feMergeNode in="shape" />
+<feMergeNode in="color1" />
+</feMerge>
+<feBlend mode="normal" in="effect2_noise_80_838" in2="effect1_dropShadow_80_838" result="effect2_noise_80_838"/>
+</filter>
+</defs>
+</svg>

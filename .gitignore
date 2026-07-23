@@ -1,0 +1,10 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.env
+.env*.local
+FigmaFiles
+generate_context.py
+project_context.md
