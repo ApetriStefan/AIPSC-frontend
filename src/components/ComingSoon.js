@@ -12,7 +12,7 @@ export default function ComingSoon() {
   return (
     <View style={[
       isDesktop ? styles.innerContainer : styles.mobileOuterContainer,
-      { height: availableHeight, justifyContent: 'center' }
+      { minHeight: availableHeight }
     ]}>
       {!isDesktop && <View style={[styles.mobileVerticalBorder, { top: 0, bottom: 0 }]} />}
       
