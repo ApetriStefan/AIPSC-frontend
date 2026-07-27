@@ -250,7 +250,7 @@ export const styles = StyleSheet.create({
     width: 386,
     height: 255,
     flexShrink: 0,
-    aspectRatio: 165 / 109,
+    aspectRatio: 386 / 255,
     borderRadius: 4,
     resizeMode: 'cover',
   },
@@ -258,7 +258,7 @@ export const styles = StyleSheet.create({
     width: 386,
     height: 255,
     flexShrink: 0,
-    aspectRatio: 165 / 109,
+    aspectRatio: 386 / 255,
     borderRadius: 4,
     backgroundColor: '#CFD6D9',
     borderWidth: 1,
@@ -452,7 +452,10 @@ export const styles = StyleSheet.create({
   mobileCarouselImage: {
     width: 280,
     height: 180,
+    flexShrink: 0,
+    aspectRatio: 280 / 180,
     borderRadius: 6,
+    resizeMode: 'cover',
   },
   mobileCarouselPlaceholderImage: {
     width: 280,

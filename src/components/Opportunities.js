@@ -22,10 +22,10 @@ export default function Opportunities() {
   const getRow1Bg = () => {
     if (Platform.OS === 'web') {
       return {
-        backgroundImage: `linear-gradient(180deg, #CDD7D6 15%, rgba(205, 215, 214, 0.00) 65%), linear-gradient(90deg, #CDD7D6 30%, rgba(205, 215, 214, 0.00) 85%), url(${require('../../assets/images/shooting-man-2.svg')})`,
-        backgroundPosition: 'top left, left center, 62% center',
-        backgroundSize: '100% 100%, 100% 100%, cover',
-        backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
+        backgroundImage: `linear-gradient(90deg, #CDD7D6 25%, rgba(205, 215, 214, 0.00) 65%), url(${require('../../assets/images/shooting-man-2.svg')})`,
+        backgroundPosition: 'left center, right center',
+        backgroundSize: '100% 100%, contain',
+        backgroundRepeat: 'no-repeat, no-repeat',
         backgroundColor: '#CDD7D6',
       };
     }
@@ -36,15 +36,22 @@ export default function Opportunities() {
     if (Platform.OS !== 'web' || activePathway === 'none') {
       return { backgroundColor: '#CDD7D6' };
     }
-    const bgImg =
-      activePathway === 'misia'
-        ? require('../../assets/images/shooting-man-4.png')
-        : require('../../assets/images/shooting-man-3.png');
 
+    if (activePathway === 'misia') {
+      return {
+        backgroundImage: `linear-gradient(90deg, #CDD7D6 30%, rgba(205, 215, 214, 0.00) 70%), url(${require('../../assets/images/shooting-man-4.png')})`,
+        backgroundPosition: 'left center, right top',
+        backgroundSize: '100% 100%, auto 120%',
+        backgroundRepeat: 'no-repeat, no-repeat',
+        backgroundColor: '#CDD7D6',
+      };
+    }
+
+    // activePathway === 'iroa'
     return {
-      backgroundImage: `linear-gradient(90deg, #CDD7D6 35%, rgba(205, 215, 214, 0.00) 80%), url(${bgImg})`,
+      backgroundImage: `linear-gradient(90deg, #CDD7D6 45%, rgba(205, 215, 214, 0.00) 80%), url(${require('../../assets/images/shooting-man-3.png')})`,
       backgroundPosition: 'left center, right center',
-      backgroundSize: 'cover, cover',
+      backgroundSize: '100% 100%, cover',
       backgroundRepeat: 'no-repeat, no-repeat',
       backgroundColor: '#CDD7D6',
     };
