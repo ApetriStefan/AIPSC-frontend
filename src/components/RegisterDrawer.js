@@ -237,9 +237,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
 
       <View style={styles.successFooter}>
         <Text style={styles.successFooterLabel}>More info:</Text>
-        <Text style={styles.successFooterLink}>Examplemail@gmail.com</Text>
-        <Text style={styles.successFooterSeparator}>|</Text>
-        <Text style={styles.successFooterLink}>+40 725 234 743</Text>
+        <Text style={styles.successFooterLink}>contact@aipsc.ro</Text>
         <Text style={styles.successFooterSeparator}>|</Text>
         <Text style={styles.successFooterLink}>Ambassador Program</Text>
       </View>

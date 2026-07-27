@@ -76,8 +76,7 @@ export default function Footer({ onOpenPolicy, onNavigate, onOpenAmbassador }) {
             {/* Left Column: Contacts */}
             <View style={styles.mobileColumnContacts}>
               <Text style={styles.mobileColTitleContacts}>Contacts:</Text>
-              <Text style={styles.mobileContactTextGold}>Examplemail@gmail.com</Text>
-              <Text style={styles.mobileContactTextGold}>+0725 234 743</Text>
+              <Text style={styles.mobileContactTextGold}>contact@aipsc.ro</Text>
             </View>
 
             {/* Right Column: Stacked Logos */}
@@ -249,8 +248,7 @@ export default function Footer({ onOpenPolicy, onNavigate, onOpenAmbassador }) {
           {/* Left Column: Contacts */}
           <View style={styles.columnContacts}>
             <Text style={styles.colTitleContacts}>Contacts:</Text>
-            <Text style={styles.contactTextGold}>Examplemail@gmail.com</Text>
-            <Text style={styles.contactTextGold}>+0725 234 743</Text>
+            <Text style={styles.contactTextGold}>contact@aipsc.ro</Text>
           </View>
 
           {/* Middle Column: Useful links (all styled with gold text) */}
