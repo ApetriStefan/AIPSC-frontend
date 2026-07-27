@@ -16,7 +16,7 @@ export default function RegisterBanner({ onOpenRegister }) {
           <View style={styles.mobileBannerLeftContent}>
             <Text style={styles.mobileBannerTitle}>Register now!</Text>
             <Text style={styles.mobileBannerDescription}>
-              Lorem ipsum dolor sit amet consectetur. Scelerisque egestas dolor feugiat mi nulla. Vestibulum auctor sed diam nisl etiam aliquam vulputate sit.
+              Secure your spot for 3 days of intensive practical shooting instruction with MISIA-certified trainers. Limited seats available, no firearm ownership required!
             </Text>
 
             <View style={styles.mobileBannerActionRow}>
@@ -47,7 +47,7 @@ export default function RegisterBanner({ onOpenRegister }) {
         <View style={styles.bannerLeftContent}>
           <Text style={styles.bannerTitle}>Register now!</Text>
           <Text style={styles.bannerDescription}>
-            Lorem ipsum dolor sit amet consectetur. Scelerisque egestas dolor feugiat mi nulla. Vestibulum auctor sed diam nisl etiam aliquam vulputate sit.
+            Secure your spot for 3 days of intensive practical shooting instruction with MISIA-certified trainers. Limited seats available, no firearm ownership required!
           </Text>
 
           <View style={styles.bannerActionRow}>

@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     fontSize: 18,
     lineHeight: '145%',
-    color: COLORS.redAccent,
+    color: COLORS.white,
     fontWeight: '400',
   },
   bannerActionRow: {
@@ -150,7 +150,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     fontSize: 15,
     lineHeight: '145%',
-    color: COLORS.redAccent,
+    color: COLORS.white,
     fontWeight: '400',
   },
   mobileBannerActionRow: {
