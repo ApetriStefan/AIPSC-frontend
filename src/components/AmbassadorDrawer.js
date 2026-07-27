@@ -238,7 +238,42 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
 
   if (!visible) return null;
 
-  const formContent = success ? (
+  const IS_TEMPORARILY_CLOSED = true;
+
+  const closedView = (
+    <View style={styles.successBlock}>
+      <View style={[styles.successCenteredContent, !isDesktop && { paddingHorizontal: 24 }]}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 112 112" fill="none">
+          <path d="M56 0L69.5493 19.3568C70.1735 20.2485 71.2579 20.6977 72.3298 20.5085L95.598 16.402L91.4915 39.6702C91.3023 40.7421 91.7515 41.8265 92.6432 42.4507L112 56L92.6432 69.5493C91.7515 70.1735 91.3023 71.2579 91.4915 72.3298L95.598 95.598L72.3298 91.4915C71.2579 91.3023 70.1735 91.7515 69.5493 92.6432L56 112L42.4507 92.6432C41.8265 91.7515 40.7421 91.3023 39.6702 91.4915L16.402 95.598L20.5085 72.3298C20.6977 71.2579 20.2485 70.1735 19.3568 69.5493L0 56L19.3568 42.4507C20.2485 41.8265 20.6977 40.7421 20.5085 39.6702L16.402 16.402L39.6702 20.5085C40.7421 20.6977 41.8265 20.2485 42.4507 19.3568L56 0Z" fill="url(#paint0_linear_amb_closed)"/>
+          <path d="M56 36V60M56 74H56.02" stroke="#01213B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+          <defs>
+            <linearGradient id="paint0_linear_amb_closed" x1="56" y1="0" x2="56" y2="112" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#AD9F7A"/>
+              <stop offset="1" stopColor="#BA9842"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <Text style={[styles.successTitle, !isDesktop && { fontSize: 32 }]}>
+          Ambassador Program Temporarily Closed
+        </Text>
+        <Text style={[styles.successText, !isDesktop && { fontSize: 16, marginBottom: 32 }]}>
+          The Ambassador referral program is currently paused. Please check back soon, or reach out to us at contact@aipsc.ro for details.
+        </Text>
+
+        <TouchableOpacity style={styles.successHomeBtn} onPress={onClose}>
+          <Text style={styles.successHomeBtnText}>CLOSE</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.successFooter}>
+        <Text style={styles.successFooterLabel}>More info:</Text>
+        <Text style={styles.successFooterLink}>contact@aipsc.ro</Text>
+      </View>
+    </View>
+  );
+
+  const activeFormContent = success ? (
     <View style={styles.successBlock}>
       <View style={styles.successCenteredContent}>
         <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
@@ -459,6 +494,8 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
       </View>
     </ScrollView>
   );
+
+  const formContent = IS_TEMPORARILY_CLOSED ? closedView : activeFormContent;
 
   const confirmDeleteModal = confirmDeleteId !== null ? (
     <View style={styles.confirmOverlay} pointerEvents="box-none">
