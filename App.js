@@ -25,6 +25,7 @@ import Footer from './src/components/Footer';
 import { LegalModal } from './src/components/LegalModal';
 import { RegisterDrawer } from './src/components/RegisterDrawer';
 import { AmbassadorDrawer } from './src/components/AmbassadorDrawer';
+import ComingSoon from './src/components/ComingSoon';
 
 // Dynamically inject Google Fonts & Title/Favicon for browser rendering
 if (Platform.OS === 'web') {
@@ -165,6 +166,9 @@ export default function App() {
     } else if (section === 'experience') {
       setViewMode('experience');
       scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+    } else if (section === 'member-coming-soon') {
+      setViewMode('member-coming-soon');
+      scrollViewRef.current?.scrollTo({ y: 0, animated: true });
     } else if (section === 'home') {
       setViewMode('course');
       scrollViewRef.current?.scrollTo({ y: 0, animated: true });
@@ -212,6 +216,7 @@ export default function App() {
         style={styles.scrollContainer} 
         scrollEventThrottle={16}
         onScroll={handleScroll}
+        scrollEnabled={renderedMode !== 'member-coming-soon'}
       >
         {/* Static Grid Template Wrapper */}
         <View 
@@ -247,35 +252,40 @@ export default function App() {
             {renderedMode === 'course' && <Hero onOpenRegister={() => setRegisterVisible(true)} />}
             {renderedMode === 'instructors' && <Instructors />}
             {renderedMode === 'experience' && <Experience />}
+            {renderedMode === 'member-coming-soon' && <ComingSoon />}
           </Animated.View>
         </View>
 
-        <View onLayout={captureSectionLayout('course')}>
-          <CourseDetails onOpenRegister={() => setRegisterVisible(true)} />
-        </View>
+        {renderedMode !== 'member-coming-soon' && (
+          <>
+            <View onLayout={captureSectionLayout('course')}>
+              <CourseDetails onOpenRegister={() => setRegisterVisible(true)} />
+            </View>
 
-        <Requirements />
+            <Requirements />
 
-        <View onLayout={captureSectionLayout('opportunities')}>
-          <Opportunities />
-        </View>
+            <View onLayout={captureSectionLayout('opportunities')}>
+              <Opportunities onNavigateToMemberComingSoon={() => handleNavigate('member-coming-soon')} />
+            </View>
 
-        <View onLayout={captureSectionLayout('costs')}>
-          <Costs onOpenRegister={() => setRegisterVisible(true)} />
-        </View>
+            <View onLayout={captureSectionLayout('costs')}>
+              <Costs onOpenRegister={() => setRegisterVisible(true)} />
+            </View>
 
-        <View onLayout={captureSectionLayout('schedule')}>
-          <Schedule onOpenRegister={() => setRegisterVisible(true)} />
-        </View>
-        
-        {/* Unified screen-height Ambassador & Footer Section */}
-        <View style={{ zIndex: 1 }}>
-          <Footer 
-            onOpenPolicy={handleOpenPolicy} 
-            onNavigate={handleNavigate}
-            onOpenAmbassador={() => setAmbassadorVisible(true)}
-          />
-        </View>
+            <View onLayout={captureSectionLayout('schedule')}>
+              <Schedule onOpenRegister={() => setRegisterVisible(true)} />
+            </View>
+            
+            {/* Unified screen-height Ambassador & Footer Section */}
+            <View style={{ zIndex: 1 }}>
+              <Footer 
+                onOpenPolicy={handleOpenPolicy} 
+                onNavigate={handleNavigate}
+                onOpenAmbassador={() => setAmbassadorVisible(true)}
+              />
+            </View>
+          </>
+        )}
       </ScrollView>
 
       {/* Render LegalModal */}

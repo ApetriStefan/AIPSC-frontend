@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, useWindowDimensions, Platform } from 'react-native';
 import { styles } from '../styles/Opportunities.styles';
 
-export default function Opportunities() {
+export default function Opportunities({ onNavigateToMemberComingSoon }) {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 900;
 
@@ -71,6 +71,7 @@ export default function Opportunities() {
             <TouchableOpacity
               style={styles.mobileCard1Container}
               activeOpacity={0.9}
+              onPress={onNavigateToMemberComingSoon}
             >
               <View style={styles.mobileCard1Header}>
                 <Image
@@ -225,6 +226,7 @@ export default function Opportunities() {
               { flexDirection: isDesktop ? 'row' : 'column', alignItems: isDesktop ? 'center' : 'stretch' }
             ]}
             activeOpacity={0.9}
+            onPress={onNavigateToMemberComingSoon}
           >
             <View style={[
               styles.rowLeftBox,
