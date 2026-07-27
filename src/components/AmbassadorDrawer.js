@@ -161,6 +161,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
   };
 
   const addReferral = () => {
+    if (referralList.length >= 3) return;
     setReferralList(prev => [
       ...prev,
       { id: Date.now(), firstName: '', lastName: '', email: '' }
@@ -413,7 +414,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
               </View>
             ))}
 
-            {!loading && (
+            {!loading && referralList.length < 3 && (
               <TouchableOpacity
                 style={styles.addPersonBtn}
                 onPress={addReferral}
