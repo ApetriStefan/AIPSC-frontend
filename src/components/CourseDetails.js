@@ -96,7 +96,7 @@ function EventCard({ isDesktop, onOpenRegister }) {
       <View style={styles.imageBackgroundContainer}>
         <View style={{ overflow: 'hidden', width: '100%', height: '100%' }}>
           <Image
-            source={require('../../assets/images/hotel-casa-romana.png')}
+            source={require('../../assets/images/accomodation/hotel-casa-romana.png')}
             style={styles.eventCardImage}
           />
         </View>

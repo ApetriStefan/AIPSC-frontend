@@ -211,8 +211,8 @@ export default function Costs({ onOpenRegister }) {
                 scrollEventThrottle={16}
                 onScroll={handleScrollAccommodation}
               >
-                <Image source={require('../../assets/images/hotel-casa-romana.png')} style={styles.mobileCarouselImage} />
-                <Image source={require('../../assets/images/hotel-casa-romana2.png')} style={styles.mobileCarouselImage} />
+                <Image source={require('../../assets/images/accomodation/hotel-casa-romana.png')} style={styles.mobileCarouselImage} />
+                <Image source={require('../../assets/images/accomodation/hotel-casa-romana2.png')} style={styles.mobileCarouselImage} />
               </ScrollView>
             </View>
 
@@ -257,8 +257,8 @@ export default function Costs({ onOpenRegister }) {
                 scrollEventThrottle={16}
                 onScroll={handleScrollGun}
               >
-                <Image source={require('../../assets/images/hotel-casa-romana.png')} style={styles.mobileCarouselImage} />
-                <Image source={require('../../assets/images/hotel-casa-romana2.png')} style={styles.mobileCarouselImage} />
+                <Image source={require('../../assets/images/equipment/cz-75-pistol-image.png')} style={styles.mobileCarouselImage} />
+                <Image source={require('../../assets/images/equipment/cz-75-compact-pistol-image.png')} style={styles.mobileCarouselImage} />
               </ScrollView>
             </View>
           </View>
@@ -399,8 +399,8 @@ export default function Costs({ onOpenRegister }) {
               scrollEventThrottle={16}
               onScroll={handleScrollAccommodation}
             >
-              <Image source={require('../../assets/images/hotel-casa-romana.png')} style={styles.carouselImage} />
-              <Image source={require('../../assets/images/hotel-casa-romana2.png')} style={styles.carouselImage} />
+              <Image source={require('../../assets/images/accomodation/hotel-casa-romana.png')} style={styles.carouselImage} />
+              <Image source={require('../../assets/images/accomodation/hotel-casa-romana2.png')} style={styles.carouselImage} />
 
               <View style={styles.carouselPlaceholderImage}>
                 <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -509,8 +509,8 @@ export default function Costs({ onOpenRegister }) {
               scrollEventThrottle={16}
               onScroll={handleScrollGun}
             >
-              <Image source={require('../../assets/images/hotel-casa-romana.png')} style={styles.carouselImage} />
-              <Image source={require('../../assets/images/hotel-casa-romana2.png')} style={styles.carouselImage} />
+              <Image source={require('../../assets/images/equipment/cz-75-pistol-image.png')} style={styles.carouselImage} />
+              <Image source={require('../../assets/images/equipment/cz-75-compact-pistol-image.png')} style={styles.carouselImage} />
 
               <View style={styles.carouselPlaceholderImage}>
                 <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
