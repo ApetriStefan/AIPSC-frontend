@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { styles } from '../styles/AmbassadorDrawer.styles';
 
-const API_BASE_URL = 'http://localhost:8000'; // Update this to your production API url when deployed
+const API_BASE_URL = Platform.OS === 'web' ? '' : 'http://localhost:8000'; // Empty string on web → requests hit /api/... on the live domain (Cloudflare Pages Functions)
 
 export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
   const { width, height } = useWindowDimensions();
