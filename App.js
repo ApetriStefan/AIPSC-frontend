@@ -62,6 +62,17 @@ export default function App() {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 900;
 
+  // Dynamic left column scaling: minWidth 284px at <=1440p, maxWidth 364px at >=1920p
+  const leftColWidth = isDesktop
+    ? (width <= 1440 ? 284 : width >= 1920 ? 364 : Math.round(284 + ((width - 1440) / 480) * 80))
+    : undefined;
+  const logoScale = leftColWidth ? leftColWidth / 284 : 1;
+
+  // Dynamic main content width scaling: 794px at <=1440p, 1018px at >=1920p
+  const mainContentWidth = isDesktop
+    ? (width <= 1440 ? 794 : width >= 1920 ? 1018 : Math.round(794 + ((width - 1440) / 480) * 224))
+    : undefined;
+
   const scrollViewRef = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [policyType, setPolicyType] = useState('privacy');
@@ -201,7 +212,7 @@ export default function App() {
         left: 0,
         right: 0,
         height: 3,
-        backgroundColor: 'transparent',
+        backgroundColor: '#011B36',
         zIndex: 10000,
       }}>
         <View style={{
@@ -231,10 +242,16 @@ export default function App() {
         >
           {/* Left Column with Sticky Emblem */}
           {isDesktop && (
-            <View style={styles.leftColumn}>
+            <View style={[styles.leftColumn, { width: leftColWidth, minWidth: 284, maxWidth: 364 }]}>
               <Image 
                 source={require('./assets/images/logo-bg.svg')} 
-                style={styles.logoInsignia} 
+                style={[
+                  styles.logoInsignia,
+                  {
+                    width: Math.round(68 * logoScale),
+                    height: Math.round(70.27 * logoScale),
+                  }
+                ]} 
               />
             </View>
           )}
@@ -244,36 +261,38 @@ export default function App() {
             styles.mainColumn, 
             { 
               paddingLeft: isDesktop ? 40 : 0,
-              paddingVertical: isDesktop ? 60 : 32,
+              paddingTop: isDesktop ? 60 : 32,
+              paddingBottom: 0,
+              maxWidth: mainContentWidth,
               opacity: fadeAnim,
               transform: [{ translateY: slideAnim }]
             }
           ]}>
-            {renderedMode === 'course' && <Hero onOpenRegister={() => setRegisterVisible(true)} />}
+            {renderedMode === 'course' && <Hero mainContentWidth={mainContentWidth} onOpenRegister={() => setRegisterVisible(true)} />}
             {renderedMode === 'instructors' && <Instructors />}
             {renderedMode === 'experience' && <Experience />}
-            {renderedMode === 'member-coming-soon' && <ComingSoon />}
+            {renderedMode === 'member-coming-soon' && <ComingSoon mainContentWidth={mainContentWidth} />}
           </Animated.View>
         </View>
 
         {renderedMode !== 'member-coming-soon' && (
           <>
             <View onLayout={captureSectionLayout('course')}>
-              <CourseDetails onOpenRegister={() => setRegisterVisible(true)} />
+              <CourseDetails leftColWidth={leftColWidth} mainContentWidth={mainContentWidth} onOpenRegister={() => setRegisterVisible(true)} />
             </View>
 
             <Requirements />
 
             <View onLayout={captureSectionLayout('opportunities')}>
-              <Opportunities onNavigateToMemberComingSoon={() => handleNavigate('member-coming-soon')} />
+              <Opportunities leftColWidth={leftColWidth} onNavigateToMemberComingSoon={() => handleNavigate('member-coming-soon')} />
             </View>
 
             <View onLayout={captureSectionLayout('costs')}>
-              <Costs onOpenRegister={() => setRegisterVisible(true)} />
+              <Costs leftColWidth={leftColWidth} onOpenRegister={() => setRegisterVisible(true)} />
             </View>
 
             <View onLayout={captureSectionLayout('schedule')}>
-              <Schedule onOpenRegister={() => setRegisterVisible(true)} />
+              <Schedule leftColWidth={leftColWidth} onOpenRegister={() => setRegisterVisible(true)} />
             </View>
             
             {/* Unified screen-height Ambassador & Footer Section */}
@@ -325,8 +344,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: '6%',
   },
   leftColumn: {
-    minWidth: 285,
-    maxWidth: 365,
+    minWidth: 284,
+    maxWidth: 364,
     alignItems: 'center',
     borderRightWidth: 2,
     borderRightColor: COLORS.gold,

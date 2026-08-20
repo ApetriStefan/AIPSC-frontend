@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, useWindowDimensions, Platform } from 'react-native';
 import { styles } from '../styles/Hero.styles';
 
-export default function ComingSoon() {
+export default function ComingSoon({ mainContentWidth }) {
   const { width, height } = useWindowDimensions();
   const isDesktop = width >= 900;
   
@@ -12,7 +12,8 @@ export default function ComingSoon() {
   return (
     <View style={[
       isDesktop ? styles.innerContainer : styles.mobileOuterContainer,
-      { minHeight: availableHeight }
+      { minHeight: availableHeight },
+      mainContentWidth ? { maxWidth: mainContentWidth } : null
     ]}>
       {!isDesktop && <View style={[styles.mobileVerticalBorder, { top: 0, bottom: 0 }]} />}
       

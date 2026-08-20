@@ -32,7 +32,7 @@ const KernedPrice = ({ value, style }) => {
   return <Text style={style}>{value}</Text>;
 };
 
-export default function Costs({ onOpenRegister }) {
+export default function Costs({ leftColWidth, onOpenRegister }) {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 900;
 
@@ -282,7 +282,7 @@ export default function Costs({ onOpenRegister }) {
     >
       {/* Sticky Left Column (Desktop Only) */}
       {isDesktop && (
-        <View style={styles.leftColumn}>
+        <View style={[styles.leftColumn, leftColWidth ? { width: leftColWidth } : null]}>
           <View style={styles.stickyWrapper}>
             <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}>
               <Text style={styles.sidebarFirstWord}>{stickyText.first}</Text>

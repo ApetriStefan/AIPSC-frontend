@@ -1,63 +1,54 @@
-// src/components/Header.js
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, useWindowDimensions, Image, Pressable, Animated, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, useWindowDimensions, Image, Pressable, Animated, Platform, Linking } from 'react-native';
 import { styles } from '../styles/Header.styles';
 import { COLORS } from '../constants/theme';
 
 const AnimatedNavItem = ({ onPress, isHome, children }) => {
-  const bgAnim = useRef(new Animated.Value(0)).current;
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
-  const handlePressIn = () => {
-    bgAnim.setValue(1);
+  const getBackgroundColor = () => {
+    if (isPressed) return '#011B36';
+    if (isHovered) return '#01223C';
+    return 'transparent';
   };
-
-  const handlePressOut = () => {
-    Animated.timing(bgAnim, {
-      toValue: 0,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const backgroundColor = bgAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['transparent', COLORS.darkNavy],
-  });
 
   return (
-    <Pressable onPress={onPress} onPressIn={handlePressIn} onPressOut={handlePressOut}>
-      <Animated.View style={[isHome ? styles.homeBtn : styles.navItemBtn, { backgroundColor }]}>
+    <Pressable 
+      onPress={onPress} 
+      onPressIn={() => setIsPressed(true)} 
+      onPressOut={() => setIsPressed(false)}
+      onHoverIn={() => setIsHovered(true)}
+      onHoverOut={() => setIsHovered(false)}
+    >
+      <View style={[isHome ? styles.homeBtn : styles.navItemBtn, { backgroundColor: getBackgroundColor() }]}>
         {children}
-      </Animated.View>
+      </View>
     </Pressable>
   );
 };
 
 const AnimatedMobileNavItem = ({ onPress, children }) => {
-  const bgAnim = useRef(new Animated.Value(0)).current;
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
-  const handlePressIn = () => {
-    bgAnim.setValue(1);
+  const getBackgroundColor = () => {
+    if (isPressed) return '#011B36';
+    if (isHovered) return '#01223C';
+    return 'transparent';
   };
-
-  const handlePressOut = () => {
-    Animated.timing(bgAnim, {
-      toValue: 0,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const backgroundColor = bgAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['transparent', 'rgba(255,255,255,0.05)'],
-  });
 
   return (
-    <Pressable onPress={onPress} onPressIn={handlePressIn} onPressOut={handlePressOut}>
-      <Animated.View style={[styles.mobileNavItem, { backgroundColor }]}>
+    <Pressable 
+      onPress={onPress} 
+      onPressIn={() => setIsPressed(true)} 
+      onPressOut={() => setIsPressed(false)}
+      onHoverIn={() => setIsHovered(true)}
+      onHoverOut={() => setIsHovered(false)}
+    >
+      <View style={[styles.mobileNavItem, { backgroundColor: getBackgroundColor() }]}>
         {children}
-      </Animated.View>
+      </View>
     </Pressable>
   );
 };
@@ -67,6 +58,7 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
   const isDesktop = width >= 1024;
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isRegisterHovered, setIsRegisterHovered] = useState(false);
 
   // Hamburger → X animation
   const rotateAnim = useRef(new Animated.Value(0)).current;
@@ -107,8 +99,25 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
     <View style={{ zIndex: 9999 }}>
       <View style={styles.headerContainer}>
         <View style={styles.logoGroup}>
-          <Image source={require('../../assets/images/ipsc-logo.svg')} style={styles.headerLogo} />
-          <Image source={require('../../assets/images/misia-logo.svg')} style={styles.headerLogo} />
+          <TouchableOpacity 
+            onPress={() => Linking.openURL('https://www.ipsc.org/')}
+            activeOpacity={0.8}
+          >
+            <Image 
+              source={require('../../assets/images/ipsc-logo.svg')} 
+              style={isDesktop ? styles.ipscLogoDesktop : styles.ipscLogoMobile} 
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            onPress={() => Linking.openURL('https://www.misia.world/')}
+            activeOpacity={0.8}
+          >
+            <Image 
+              source={require('../../assets/images/misia-logo.svg')} 
+              style={isDesktop ? styles.misiaLogoDesktop : styles.misiaLogoMobile} 
+            />
+          </TouchableOpacity>
         </View>
 
         {isDesktop ? (
@@ -138,7 +147,16 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
 
         {/* Right side: Register btn (desktop) | Hamburger (mobile) */}
         {isDesktop ? (
-          <TouchableOpacity style={styles.registerBtn} onPress={onOpenRegister}>
+          <TouchableOpacity 
+            style={[
+              styles.registerBtn,
+              isRegisterHovered && { backgroundColor: '#CABB91' }
+            ]} 
+            onPress={onOpenRegister}
+            onMouseEnter={() => setIsRegisterHovered(true)}
+            onMouseLeave={() => setIsRegisterHovered(false)}
+            activeOpacity={0.85}
+          >
             <Text style={styles.registerBtnText}>REGISTER NOW</Text>
             <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
           </TouchableOpacity>

@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     }),
   },
   leftColumn: {
-    minWidth: 285,
-    maxWidth: 365,
+    minWidth: 284,
+    maxWidth: 364,
     borderRightWidth: 2,
     borderRightColor: '#A3AFAE',
     paddingRight: 24,
@@ -205,7 +205,7 @@ export const styles = StyleSheet.create({
     minWidth: 205,
     backgroundColor: COLORS.navy,
     // paddingVertical: 10,
-    paddingHorizontal: 18,
+    paddingHorizontal: 24,
     marginLeft: 420,
     borderRadius: 4,
     flexDirection: 'row',
@@ -379,7 +379,7 @@ export const styles = StyleSheet.create({
   mobileRegisterBtn: {
     backgroundColor: COLORS.navy,
     paddingVertical: 14,
-    paddingHorizontal: 28,
+    paddingHorizontal: 24,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',

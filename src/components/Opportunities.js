@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, useWindowDimensions, Platform } from 'react-native';
 import { styles } from '../styles/Opportunities.styles';
 
-export default function Opportunities({ onNavigateToMemberComingSoon }) {
+export default function Opportunities({ leftColWidth, onNavigateToMemberComingSoon }) {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 900;
 
@@ -209,7 +209,7 @@ export default function Opportunities({ onNavigateToMemberComingSoon }) {
 
       {/* Empty Left Column (Desktop Only) */}
       {isDesktop && (
-        <View style={styles.leftColumn} />
+        <View style={[styles.leftColumn, leftColWidth ? { width: leftColWidth } : null]} />
       )}
 
       {/* Main Content Column */}

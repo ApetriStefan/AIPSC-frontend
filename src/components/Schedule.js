@@ -35,7 +35,7 @@ const program = [
   }
 ];
 
-export default function Schedule({ onOpenRegister }) {
+export default function Schedule({ leftColWidth, onOpenRegister }) {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 900;
 
@@ -83,7 +83,7 @@ export default function Schedule({ onOpenRegister }) {
   return (
     <View style={[styles.sectionContainer, { flexDirection: 'row' }]}>
       {/* Empty Left Column (Desktop Only) */}
-      <View style={styles.leftColumn} />
+      <View style={[styles.leftColumn, leftColWidth ? { width: leftColWidth } : null]} />
 
       {/* Main Content Column */}
       <View style={styles.mainColumn}>

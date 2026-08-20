@@ -396,13 +396,13 @@ export const styles = StyleSheet.create({
     marginRight: '10%',
     backgroundColor: '#EEEEEE',
     paddingVertical: 14,
-    paddingHorizontal: 68,
+    paddingHorizontal: 24,
     borderRadius: 4,
   },
   /* Mobile: full-width submit button */
   mobileSubmitBtn: {
     marginRight: 0,
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
     alignItems: 'center',
   },
   submitBtnText: {
@@ -450,7 +450,7 @@ export const styles = StyleSheet.create({
   successHomeBtn: {
     backgroundColor: '#EEEEEE',
     paddingVertical: 14,
-    paddingHorizontal: 54,
+    paddingHorizontal: 24,
     borderRadius: 4,
     marginTop: 10,
   },

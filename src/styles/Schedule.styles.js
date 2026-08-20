@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   leftColumn: {
-    minWidth: 285,
-    maxWidth: 365,
+    minWidth: 284,
+    maxWidth: 364,
     borderRightWidth: 2,
     borderRightColor: COLORS.gold,
     paddingRight: 24,

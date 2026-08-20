@@ -15,7 +15,11 @@ export const styles = StyleSheet.create({
     zIndex: 9999,
     elevation: 10,
   },
-  logoGroup: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  logoGroup: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  ipscLogoDesktop: { width: 50, height: 50, resizeMode: 'contain' },
+  misiaLogoDesktop: { width: 65, height: 42, resizeMode: 'contain' },
+  ipscLogoMobile: { width: 40, height: 40, resizeMode: 'contain' },
+  misiaLogoMobile: { width: 52, height: 34, resizeMode: 'contain' },
   headerLogo: { width: 45, height: 45, resizeMode: 'contain' },
   navLinks: { flexDirection: 'row', gap: 16, alignItems: 'center' },
   homeBtn: {
@@ -33,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   navItemBtn: {
     paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingHorizontal: 24,
     borderRadius: 4,
     backgroundColor: 'transparent',
     justifyContent: 'center',
@@ -53,10 +57,9 @@ export const styles = StyleSheet.create({
   registerBtn: {
     backgroundColor: COLORS.white,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
     borderRadius: 4,
-    borderWidth: 1,
-    borderColor: COLORS.gold,
+    borderWidth: 0,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
@@ -128,7 +131,7 @@ export const styles = StyleSheet.create({
   mobileRegisterBtn: {
     backgroundColor: COLORS.white,
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: COLORS.gold,

@@ -4,6 +4,7 @@ import { COLORS, FONTS } from '../constants/theme';
 
 export const styles = StyleSheet.create({
   innerContainer: {
+    minWidth: 794,
     maxWidth: 1018,
     gap: 32,
     width: '100%',

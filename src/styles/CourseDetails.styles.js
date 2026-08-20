@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     overflow: 'visible',
   },
   leftColumn: {
-    minWidth: 285,
-    maxWidth: 365,
+    minWidth: 284,
+    maxWidth: 364,
     borderRightWidth: 2,
     borderRightColor: COLORS.gold,
     paddingRight: 24,
@@ -40,16 +40,19 @@ export const styles = StyleSheet.create({
   cardStackWrapper: {
     position: 'relative',
     width: '100%',
+    marginTop: 64,
   },
   card: {
     position: 'absolute',
     left: 0,
     right: 0,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: COLORS.lightBg,
     paddingTop: 32,
-    gap: 30,
+    paddingBottom: 32,
+    minHeight: 151,
+    gap: 46,
     borderTopWidth: 1.5,
     borderTopColor: COLORS.gold,
   },
@@ -61,7 +64,6 @@ export const styles = StyleSheet.create({
     color: COLORS.gold,
     fontWeight: '700',
     fontStyle: 'normal',
-    marginTop: -10,
     width: 80,
     ...Platform.select({
       web: {
@@ -168,6 +170,12 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
+    ...Platform.select({
+      web: {
+        backgroundImage: `url(${require('../../assets/images/grainy-background.svg')})`,
+        backgroundRepeat: 'repeat',
+      }
+    }),
   },
   grainyOverlay: {
     position: 'absolute',
@@ -180,18 +188,17 @@ export const styles = StyleSheet.create({
       web: {
         backgroundImage: `url(${require('../../assets/images/grainy-background.svg')})`,
         backgroundRepeat: 'repeat',
-        opacity: 0.12,
+        opacity: 0.35,
         pointerEvents: 'none',
       }
     })
   },
   imageBackgroundContainer: {
     position: 'absolute',
-    top: 60,
+    top: 63,
     right: 0,
     bottom: 0,
-    width: '40%',
-    height: '80%',
+    width: '45%',
     zIndex: 1,
     overflow: 'hidden',
   },
@@ -209,29 +216,28 @@ export const styles = StyleSheet.create({
   },
   eventDetails: {
     padding: 32,
-    gap: 16,
-    justifyContent: 'center',
+    position: 'relative',
+    zIndex: 5,
   },
   tagRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 16,
+    gap: 12,
   },
   tagDivider: {
     height: 1,
     backgroundColor: 'rgba(9, 20, 19, 0.15)',
     width: '200%',
-    // marginTop: 16,
   },
   tagGold: {
     backgroundColor: '#A3AFAE',
-    paddingVertical: 6,
+    paddingVertical: 8,
     paddingHorizontal: 12,
     borderTopRightRadius: 4,
     borderTopLeftRadius: 4,
   },
   tagGoldText: {
-    color: COLORS.textDark,
+    color: '#091413',
     fontFamily: FONTS.sansSerif,
     fontSize: 12,
     textAlign: 'center',
@@ -240,7 +246,7 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   placesLeftText: {
-    color: COLORS.textMuted,
+    color: '#4E6578',
     fontFamily: FONTS.sansSerif,
     fontSize: 14,
     fontWeight: '400',
@@ -251,6 +257,7 @@ export const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '600',
     color: COLORS.textDark,
+    marginBottom: 10,
   },
   eventLocation: {
     fontFamily: FONTS.sansSerif,
@@ -258,18 +265,17 @@ export const styles = StyleSheet.create({
     color: COLORS.textMuted,
     fontWeight: '400',
     lineHeight: '125%',
-    marginTop: -10,
+    marginBottom: 34,
   },
   eventBtn: {
     backgroundColor: COLORS.navy,
     paddingVertical: 14,
-    paddingHorizontal: 28,
+    paddingHorizontal: 24,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
     alignSelf: 'flex-start',
-    marginTop: 8,
   },
   eventBtnText: {
     color: COLORS.white,
@@ -286,11 +292,11 @@ export const styles = StyleSheet.create({
   },
   eventCardImage: {
     position: 'absolute',
-    width: '101.538%',
-    height: '119.543%',
-    left: -6,
-    top: -43.017,
-    transform: [{ scaleX: -1 }],
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
 
   /* Mobile Event Card styles */
@@ -414,7 +420,7 @@ export const styles = StyleSheet.create({
     width: 293,
     backgroundColor: COLORS.navy,
     paddingVertical: 14,
-    paddingHorizontal: 28,
+    paddingHorizontal: 24,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',

@@ -4,7 +4,7 @@ import { styles } from '../styles/Hero.styles';
 
 
 
-export default function Hero({ onOpenRegister }) {
+export default function Hero({ mainContentWidth, onOpenRegister }) {
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
@@ -98,7 +98,7 @@ export default function Hero({ onOpenRegister }) {
   );
 
   return (
-    <View style={isDesktop ? styles.innerContainer : styles.mobileOuterContainer}>
+    <View style={[isDesktop ? styles.innerContainer : styles.mobileOuterContainer, mainContentWidth ? { maxWidth: mainContentWidth } : null]}>
       {!isDesktop && <View style={styles.mobileVerticalBorder} />}
       
       <View style={isDesktop ? null : styles.mobileInnerContainer}>
@@ -122,7 +122,9 @@ export default function Hero({ onOpenRegister }) {
         >
           {isDesktop ? (
             <Text style={styles.bodyTextRed}>
-              I'm excited to announce that we will be organizing a 3-day official{' '}
+              Hi everyone!
+              {"\n\n"}
+              We’re excited to announce that we will be organizing a 3-day official{' '}
               <Text
                 onMouseEnter={(e) => {
                   setActiveTooltip('IPSC');
@@ -144,15 +146,20 @@ export default function Hero({ onOpenRegister }) {
               >
                 MISIA-certified
               </Text>{' '}
-              instructors at Poligon de Tragere Cris Salaj in Zalau, in the coming months, with the exact dates confirmed and announced at least one month in advance.
+              instructors at Poligon de Tragere Cris Salaj in Zalau.
               {"\n\n"}
-              This is a high-quality, progressive training program suitable for both beginners and those already competing. The course is open to anyone interested in practical shooting, including airsofters, regardless of current level. Owning a firearm is not mandatory, you can either rent equipment from the range or use your own airsoft pistol.
+              This is a high-quality, progressive training program suitable for both beginners and those already competing. The course is open to anyone interested in practical shooting, regardless of current level. Owning a firearm is not mandatory, you can rent equipment from the range.
               {"\n\n"}
-              Thanks to the range's unique location, this course is designed as a complete experience with training, social time and visit, food.
+              Thanks to the range’s unique location, this course is designed as a complete experience with training and social activities.
+              {"\n\n"}
+              Best,{"\n"}
+              AIPSC team, Romania.
             </Text>
           ) : (
             <Text style={styles.mobileBodyTextRed}>
-              I'm excited to announce that we will be organizing a 3-day official{' '}
+              Hi everyone!
+              {"\n\n"}
+              We’re excited to announce that we will be organizing a 3-day official{' '}
               <Text
                 onPress={(e) => handleTap(e, 'IPSC')}
                 style={styles.mobileUnderlinedRedText}
@@ -174,11 +181,14 @@ export default function Hero({ onOpenRegister }) {
                 />
                 MISIA-certified
               </Text>{' '}
-              instructors at Poligon de Tragere Cris Salaj in Zalau, in the coming months, with the exact dates confirmed and announced at least one month in advance.
+              instructors at Poligon de Tragere Cris Salaj in Zalau.
               {"\n\n"}
-              This is a high-quality, progressive training program suitable for both beginners and those already competing. The course is open to anyone interested in practical shooting, including airsofters, regardless of current level. Owning a firearm is not mandatory, you can either rent equipment from the range or use your own airsoft pistol.
+              This is a high-quality, progressive training program suitable for both beginners and those already competing. The course is open to anyone interested in practical shooting, regardless of current level. Owning a firearm is not mandatory, you can rent equipment from the range.
               {"\n\n"}
-              Thanks to the range's unique location, this course is designed as a complete experience with training, social time and visit, food.
+              Thanks to the range’s unique location, this course is designed as a complete experience with training and social activities.
+              {"\n\n"}
+              Best,{"\n"}
+              AIPSC team, Romania.
             </Text>
           )}
 

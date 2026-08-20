@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: '6%',
   },
   leftColumn: {
-    minWidth: 285,
-    maxWidth: 365,
+    minWidth: 284,
+    maxWidth: 364,
     borderRightWidth: 2,
     borderRightColor: COLORS.gold,
     paddingRight: 24,
@@ -393,7 +393,7 @@ export const styles = StyleSheet.create({
   mobilePathwayBtn: {
     backgroundColor: '#01223C',
     paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingHorizontal: 24,
     borderRadius: 4,
     width: '100%',
     alignItems: 'center',

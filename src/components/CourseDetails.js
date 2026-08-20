@@ -7,7 +7,8 @@ import {
   Image, 
   useWindowDimensions, 
   Platform, 
-  Animated 
+  Animated,
+  Easing 
 } from 'react-native';
 import { styles } from '../styles/CourseDetails.styles';
 
@@ -21,7 +22,8 @@ const points = [
 
 const CARD_COUNT = points.length;
 const COLLAPSED_GAP = 55; // Initial overlap distance between card tops when stacked
-const SPREAD_GAP = 240;    // Spacing distance between card tops when fully open
+const SPREAD_GAP = 151;    // Spacing distance matching HUG card height (151px in Figma)
+const CARD_HEIGHT = 151;
 
 function findScrollParent(node) {
   let parent = node && node.parentElement;
@@ -37,8 +39,50 @@ function findScrollParent(node) {
   return window;
 }
 
+const slides = [
+  { source: require('../../assets/images/accomodation/hotel-casa-romana.png'), resizeMode: 'cover' },
+  { source: require('../../assets/images/accomodation/hotel-casa-romana2.png'), resizeMode: 'cover' },
+  { source: require('../../assets/images/equipment/canik-rival-s.jpg'), resizeMode: 'contain' },
+  { source: require('../../assets/images/equipment/cz-75.jpg'), resizeMode: 'contain' },
+];
+
 // The event card placed at the top of the right content column
 function EventCard({ isDesktop, onOpenRegister }) {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [nextSlideIndex, setNextSlideIndex] = useState(1);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+  const nextFadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (!isDesktop) return;
+
+    const interval = setInterval(() => {
+      const upcomingIndex = (currentSlideIndex + 1) % slides.length;
+      setNextSlideIndex(upcomingIndex);
+
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 400,
+          easing: Easing.ease,
+          useNativeDriver: Platform.OS !== 'web',
+        }),
+        Animated.timing(nextFadeAnim, {
+          toValue: 1,
+          duration: 400,
+          easing: Easing.ease,
+          useNativeDriver: Platform.OS !== 'web',
+        }),
+      ]).start(() => {
+        setCurrentSlideIndex(upcomingIndex);
+        fadeAnim.setValue(1);
+        nextFadeAnim.setValue(0);
+      });
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [currentSlideIndex, fadeAnim, nextFadeAnim, isDesktop]);
+
   if (!isDesktop) {
     return (
       <View style={styles.mobileEventCard}>
@@ -92,12 +136,22 @@ function EventCard({ isDesktop, onOpenRegister }) {
       {/* Grainy overlay */}
       <View style={styles.grainyOverlay} />
 
-      {/* Background image — right side */}
+      {/* Background image slideshow — right side */}
       <View style={styles.imageBackgroundContainer}>
-        <View style={{ overflow: 'hidden', width: '100%', height: '100%' }}>
-          <Image
-            source={require('../../assets/images/accomodation/hotel-casa-romana.png')}
-            style={styles.eventCardImage}
+        <View style={{ overflow: 'hidden', width: '100%', height: '100%', position: 'relative' }}>
+          <Animated.Image
+            source={slides[currentSlideIndex].source}
+            style={[
+              styles.eventCardImage,
+              { opacity: fadeAnim, resizeMode: slides[currentSlideIndex].resizeMode }
+            ]}
+          />
+          <Animated.Image
+            source={slides[nextSlideIndex].source}
+            style={[
+              styles.eventCardImage,
+              { opacity: nextFadeAnim, resizeMode: slides[nextSlideIndex].resizeMode }
+            ]}
           />
         </View>
         <View style={styles.fadeGradient} />
@@ -133,7 +187,7 @@ function EventCard({ isDesktop, onOpenRegister }) {
   );
 }
 
-export default function CourseDetails({ onOpenRegister }) {
+export default function CourseDetails({ leftColWidth, mainContentWidth, onOpenRegister }) {
   const { height, width } = useWindowDimensions();
   const isDesktop = width >= 900;
 
@@ -141,7 +195,7 @@ export default function CourseDetails({ onOpenRegister }) {
   const [isOpen, setIsOpen] = useState(false);
   const spreadAnim = useRef(new Animated.Value(0)).current;
 
-  const cardHeight = Math.max(260, Math.round(height * 0.3));
+  const cardHeight = CARD_HEIGHT;
   const stackWrapperHeight = (CARD_COUNT - 1) * SPREAD_GAP + cardHeight;
 
   const setTitleRef = useCallback((node) => {
@@ -236,12 +290,12 @@ export default function CourseDetails({ onOpenRegister }) {
           { flexDirection: 'row', paddingRight: 0, position: 'relative' }
         ]}>
           {/* Empty Left Column (Desktop Only) */}
-          <View style={styles.leftColumn} />
+          <View style={[styles.leftColumn, leftColWidth ? { width: leftColWidth } : null]} />
 
           {/* Main Content Column */}
           <View style={styles.mainColumn}>
             {/* Event Card — top of the right column, not sticky */}
-            <View style={{ paddingLeft: 40, paddingRight: 0, paddingBottom: 40 }}>
+            <View style={[{ paddingLeft: 40, paddingRight: 0, paddingTop: 68, paddingBottom: 126 }, mainContentWidth ? { maxWidth: mainContentWidth } : null]}>
               <EventCard isDesktop={true} onOpenRegister={onOpenRegister} />
             </View>
 
@@ -269,7 +323,7 @@ export default function CourseDetails({ onOpenRegister }) {
                     style={[
                       styles.card,
                       {
-                        height: cardHeight,
+                        minHeight: CARD_HEIGHT,
                         top: baseTop,
                         transform: [{ translateY }],
                         zIndex,
