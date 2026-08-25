@@ -53,7 +53,14 @@ const AnimatedMobileNavItem = ({ onPress, children }) => {
   );
 };
 
-export default function Header({ activeSection, onNavigate, onOpenRegister }) {
+export default function Header({ 
+  currentRoute = 'courses', 
+  activeSection, 
+  onNavigate, 
+  onNavigateHome,
+  onNavigateToCourses,
+  onOpenRegister 
+}) {
   const { width, height } = useWindowDimensions();
   const isDesktop = width >= 1024;
 
@@ -85,7 +92,21 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
 
   const handleNavPress = (section) => {
     setMenuOpen(false);
-    onNavigate && onNavigate(section);
+    if (section === 'home') {
+      if (currentRoute === 'courses') {
+        onNavigateHome ? onNavigateHome() : onNavigate && onNavigate('home');
+      } else {
+        onNavigateHome ? onNavigateHome() : onNavigate && onNavigate('home');
+      }
+    } else if (section === 'courses') {
+      onNavigateToCourses && onNavigateToCourses();
+    } else {
+      if (currentRoute === 'landing') {
+        onNavigateToCourses ? onNavigateToCourses(section) : onNavigate && onNavigate(section);
+      } else {
+        onNavigate && onNavigate(section);
+      }
+    }
   };
 
   // Interpolations for the two hamburger bars -> X
@@ -123,25 +144,33 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
         {isDesktop ? (
           <View style={styles.navLinks}>
             {/* Home button */}
-            <AnimatedNavItem isHome onPress={() => onNavigate && onNavigate('home')}>
+            <AnimatedNavItem isHome onPress={() => handleNavPress('home')}>
               <Image source={require('../../assets/images/home-button.svg')} style={styles.homeIcon} />
             </AnimatedNavItem>
 
-            <AnimatedNavItem onPress={() => onNavigate && onNavigate('instructors')}>
-              <Text style={styles.navItemText}>INSTRUCTORS</Text>
-            </AnimatedNavItem>
+            {currentRoute === 'landing' ? (
+              <AnimatedNavItem onPress={() => handleNavPress('courses')}>
+                <Text style={styles.navItemText}>COURSES</Text>
+              </AnimatedNavItem>
+            ) : (
+              <>
+                <AnimatedNavItem onPress={() => handleNavPress('instructors')}>
+                  <Text style={styles.navItemText}>INSTRUCTORS</Text>
+                </AnimatedNavItem>
 
-            <AnimatedNavItem onPress={() => onNavigate && onNavigate('course')}>
-              <Text style={styles.navItemText}>COURSE</Text>
-            </AnimatedNavItem>
+                <AnimatedNavItem onPress={() => handleNavPress('course')}>
+                  <Text style={styles.navItemText}>COURSE</Text>
+                </AnimatedNavItem>
 
-            <AnimatedNavItem onPress={() => onNavigate && onNavigate('experience')}>
-              <Text style={styles.navItemText}>EXPERIENCE</Text>
-            </AnimatedNavItem>
+                <AnimatedNavItem onPress={() => handleNavPress('experience')}>
+                  <Text style={styles.navItemText}>EXPERIENCE</Text>
+                </AnimatedNavItem>
 
-            <AnimatedNavItem onPress={() => onNavigate && onNavigate('costs')}>
-              <Text style={styles.navItemText}>COSTS</Text>
-            </AnimatedNavItem>
+                <AnimatedNavItem onPress={() => handleNavPress('costs')}>
+                  <Text style={styles.navItemText}>COSTS</Text>
+                </AnimatedNavItem>
+              </>
+            )}
           </View>
         ) : null}
 
@@ -152,12 +181,14 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
               styles.registerBtn,
               isRegisterHovered && { backgroundColor: '#CABB91' }
             ]} 
-            onPress={onOpenRegister}
+            onPress={currentRoute === 'landing' ? () => onNavigateToCourses && onNavigateToCourses() : onOpenRegister}
             onMouseEnter={() => setIsRegisterHovered(true)}
             onMouseLeave={() => setIsRegisterHovered(false)}
             activeOpacity={0.85}
           >
-            <Text style={styles.registerBtnText}>REGISTER NOW</Text>
+            <Text style={styles.registerBtnText}>
+              {currentRoute === 'landing' ? 'SEE COURSES' : 'REGISTER NOW'}
+            </Text>
             <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
           </TouchableOpacity>
         ) : (
@@ -189,22 +220,44 @@ export default function Header({ activeSection, onNavigate, onOpenRegister }) {
             maxHeight: height - 90,
           }
         ]}>
-          {['home', 'instructors', 'course', 'experience', 'costs'].map((section) => (
-            <AnimatedMobileNavItem key={section} onPress={() => handleNavPress(section)}>
-              <Text style={styles.mobileNavItemText}>{section === 'home' ? 'HOME' : section.toUpperCase()}</Text>
-            </AnimatedMobileNavItem>
-          ))}
+          {currentRoute === 'landing' ? (
+            <>
+              <AnimatedMobileNavItem onPress={() => handleNavPress('home')}>
+                <Text style={styles.mobileNavItemText}>HOME</Text>
+              </AnimatedMobileNavItem>
+              <AnimatedMobileNavItem onPress={() => handleNavPress('courses')}>
+                <Text style={styles.mobileNavItemText}>COURSES</Text>
+              </AnimatedMobileNavItem>
+            </>
+          ) : (
+            ['home', 'instructors', 'course', 'experience', 'costs'].map((section) => (
+              <AnimatedMobileNavItem key={section} onPress={() => handleNavPress(section)}>
+                <Text style={styles.mobileNavItemText}>{section === 'home' ? 'HOME' : section.toUpperCase()}</Text>
+              </AnimatedMobileNavItem>
+            ))
+          )}
 
           {/* Register row at the bottom of menu */}
           <View style={styles.mobileMenuRegisterRow}>
             <TouchableOpacity
               style={styles.mobileRegisterBtn}
-              onPress={() => { setMenuOpen(false); onOpenRegister(); }}
+              onPress={() => {
+                setMenuOpen(false);
+                if (currentRoute === 'landing') {
+                  onNavigateToCourses && onNavigateToCourses();
+                } else {
+                  onOpenRegister();
+                }
+              }}
             >
-              <Text style={styles.registerBtnText}>REGISTER NOW</Text>
+              <Text style={styles.registerBtnText}>
+                {currentRoute === 'landing' ? 'SEE COURSES' : 'REGISTER NOW'}
+              </Text>
               <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
             </TouchableOpacity>
-            <Text style={styles.mobileMenuPlaces}>Places left: 10</Text>
+            {currentRoute !== 'landing' && (
+              <Text style={styles.mobileMenuPlaces}>Places left: 10</Text>
+            )}
           </View>
         </Animated.View>
       )}
