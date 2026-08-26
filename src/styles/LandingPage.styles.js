@@ -177,7 +177,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     fontSize: 14,
     color: COLORS.textMuted,
-    marginBottom: 16,
+    marginBottom: 0,
   },
   previewLink: {
     flexDirection: 'row',

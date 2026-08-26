@@ -141,77 +141,69 @@ export default function Header({
           </TouchableOpacity>
         </View>
 
-        {isDesktop ? (
+        {isDesktop && currentRoute !== 'landing' ? (
           <View style={styles.navLinks}>
             {/* Home button */}
             <AnimatedNavItem isHome onPress={() => handleNavPress('home')}>
               <Image source={require('../../assets/images/home-button.svg')} style={styles.homeIcon} />
             </AnimatedNavItem>
 
-            {currentRoute === 'landing' ? (
-              <AnimatedNavItem onPress={() => handleNavPress('courses')}>
-                <Text style={styles.navItemText}>COURSES</Text>
-              </AnimatedNavItem>
-            ) : (
-              <>
-                <AnimatedNavItem onPress={() => handleNavPress('instructors')}>
-                  <Text style={styles.navItemText}>INSTRUCTORS</Text>
-                </AnimatedNavItem>
+            <AnimatedNavItem onPress={() => handleNavPress('instructors')}>
+              <Text style={styles.navItemText}>INSTRUCTORS</Text>
+            </AnimatedNavItem>
 
-                <AnimatedNavItem onPress={() => handleNavPress('course')}>
-                  <Text style={styles.navItemText}>COURSE</Text>
-                </AnimatedNavItem>
+            <AnimatedNavItem onPress={() => handleNavPress('course')}>
+              <Text style={styles.navItemText}>COURSE</Text>
+            </AnimatedNavItem>
 
-                <AnimatedNavItem onPress={() => handleNavPress('experience')}>
-                  <Text style={styles.navItemText}>EXPERIENCE</Text>
-                </AnimatedNavItem>
+            <AnimatedNavItem onPress={() => handleNavPress('experience')}>
+              <Text style={styles.navItemText}>EXPERIENCE</Text>
+            </AnimatedNavItem>
 
-                <AnimatedNavItem onPress={() => handleNavPress('costs')}>
-                  <Text style={styles.navItemText}>COSTS</Text>
-                </AnimatedNavItem>
-              </>
-            )}
+            <AnimatedNavItem onPress={() => handleNavPress('costs')}>
+              <Text style={styles.navItemText}>COSTS</Text>
+            </AnimatedNavItem>
           </View>
         ) : null}
 
-        {/* Right side: Register btn (desktop) | Hamburger (mobile) */}
-        {isDesktop ? (
-          <TouchableOpacity 
-            style={[
-              styles.registerBtn,
-              isRegisterHovered && { backgroundColor: '#CABB91' }
-            ]} 
-            onPress={currentRoute === 'landing' ? () => onNavigateToCourses && onNavigateToCourses() : onOpenRegister}
-            onMouseEnter={() => setIsRegisterHovered(true)}
-            onMouseLeave={() => setIsRegisterHovered(false)}
-            activeOpacity={0.85}
-          >
-            <Text style={styles.registerBtnText}>
-              {currentRoute === 'landing' ? 'SEE COURSES' : 'REGISTER NOW'}
-            </Text>
-            <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={styles.hamburgerBtn}
-            onPress={() => setMenuOpen(prev => !prev)}
-            activeOpacity={0.8}
-          >
-            <Animated.View style={[
-              styles.hamburgerLine,
-              { transform: [{ translateY: topLineTranslateY }, { rotate: topLineRotate }] }
-            ]} />
-            <Animated.View style={[styles.hamburgerLine, { opacity: middleLineOpacity }]} />
-            <Animated.View style={[
-              styles.hamburgerLine,
-              { transform: [{ translateY: bottomLineTranslateY }, { rotate: bottomLineRotate }] }
-            ]} />
-          </TouchableOpacity>
+        {/* Right side: Register btn (desktop) | Hamburger (mobile) — only for /courses/ slug */}
+        {currentRoute !== 'landing' && (
+          isDesktop ? (
+            <TouchableOpacity 
+              style={[
+                styles.registerBtn,
+                isRegisterHovered && { backgroundColor: '#CABB91' }
+              ]} 
+              onPress={onOpenRegister}
+              onMouseEnter={() => setIsRegisterHovered(true)}
+              onMouseLeave={() => setIsRegisterHovered(false)}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.registerBtnText}>REGISTER NOW</Text>
+              <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.hamburgerBtn}
+              onPress={() => setMenuOpen(prev => !prev)}
+              activeOpacity={0.8}
+            >
+              <Animated.View style={[
+                styles.hamburgerLine,
+                { transform: [{ translateY: topLineTranslateY }, { rotate: topLineRotate }] }
+              ]} />
+              <Animated.View style={[styles.hamburgerLine, { opacity: middleLineOpacity }]} />
+              <Animated.View style={[
+                styles.hamburgerLine,
+                { transform: [{ translateY: bottomLineTranslateY }, { rotate: bottomLineRotate }] }
+              ]} />
+            </TouchableOpacity>
+          )
         )}
       </View>
 
-      {/* Mobile Slide-Down Menu */}
-      {!isDesktop && (
+      {/* Mobile Slide-Down Menu — only for /courses/ slug */}
+      {!isDesktop && currentRoute !== 'landing' && (
         <Animated.View style={[
           styles.mobileMenu,
           {
@@ -220,22 +212,11 @@ export default function Header({
             maxHeight: height - 90,
           }
         ]}>
-          {currentRoute === 'landing' ? (
-            <>
-              <AnimatedMobileNavItem onPress={() => handleNavPress('home')}>
-                <Text style={styles.mobileNavItemText}>HOME</Text>
-              </AnimatedMobileNavItem>
-              <AnimatedMobileNavItem onPress={() => handleNavPress('courses')}>
-                <Text style={styles.mobileNavItemText}>COURSES</Text>
-              </AnimatedMobileNavItem>
-            </>
-          ) : (
-            ['home', 'instructors', 'course', 'experience', 'costs'].map((section) => (
-              <AnimatedMobileNavItem key={section} onPress={() => handleNavPress(section)}>
-                <Text style={styles.mobileNavItemText}>{section === 'home' ? 'HOME' : section.toUpperCase()}</Text>
-              </AnimatedMobileNavItem>
-            ))
-          )}
+          {['home', 'instructors', 'course', 'experience', 'costs'].map((section) => (
+            <AnimatedMobileNavItem key={section} onPress={() => handleNavPress(section)}>
+              <Text style={styles.mobileNavItemText}>{section === 'home' ? 'HOME' : section.toUpperCase()}</Text>
+            </AnimatedMobileNavItem>
+          ))}
 
           {/* Register row at the bottom of menu */}
           <View style={styles.mobileMenuRegisterRow}>
@@ -243,21 +224,13 @@ export default function Header({
               style={styles.mobileRegisterBtn}
               onPress={() => {
                 setMenuOpen(false);
-                if (currentRoute === 'landing') {
-                  onNavigateToCourses && onNavigateToCourses();
-                } else {
-                  onOpenRegister();
-                }
+                onOpenRegister();
               }}
             >
-              <Text style={styles.registerBtnText}>
-                {currentRoute === 'landing' ? 'SEE COURSES' : 'REGISTER NOW'}
-              </Text>
+              <Text style={styles.registerBtnText}>REGISTER NOW</Text>
               <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
             </TouchableOpacity>
-            {currentRoute !== 'landing' && (
-              <Text style={styles.mobileMenuPlaces}>Places left: 10</Text>
-            )}
+            <Text style={styles.mobileMenuPlaces}>Places left: 10</Text>
           </View>
         </Animated.View>
       )}

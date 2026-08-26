@@ -94,14 +94,6 @@ export default function LandingPage({ mainContentWidth, onNavigateToCourses }) {
             <Text style={styles.previewLocation}>
               Zalău (Romania) • 3-day progressive training
             </Text>
-
-            <View style={styles.previewLink}>
-              <Text style={styles.previewLinkText}>View Course Details & Schedule</Text>
-              <Image 
-                source={require('../../assets/images/arrow-top-right-corner.svg')} 
-                style={styles.previewArrow} 
-              />
-            </View>
           </TouchableOpacity>
         </View>
       </View>
