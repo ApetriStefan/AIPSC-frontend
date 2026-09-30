@@ -106,7 +106,6 @@ export async function generateRegistrationPdf(data) {
     { label: 'Full Name:', value: `${data.firstName || ''} ${data.lastName || ''}`.trim() },
     { label: 'Email Address:', value: data.email || '—' },
     { label: 'Age:', value: data.age ? `${data.age} years old` : '—' },
-    { label: 'IPSC / Shooting Experience:', value: `${data.experience || 0} years` },
   ];
 
   for (let i = 0; i < rows1.length; i++) {

@@ -34,8 +34,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState(18);
-  const [experience, setExperience] = useState(2);
-  const [equipment, setEquipment] = useState('Airsoft or real gun?');
+  const [equipment, setEquipment] = useState('Owned/Personal or Renting?');
   const [accommodation, setAccommodation] = useState(null);
 
   // Dropdown state
@@ -127,11 +126,6 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
     setAge(cleaned === '' ? '' : parseInt(cleaned, 10));
   };
 
-  const handleExperienceChange = (val) => {
-    const cleaned = val.replace(/[^0-9]/g, '');
-    setExperience(cleaned === '' ? '' : parseInt(cleaned, 10));
-  };
-
   const incrementAge = () => {
     const currentAge = age === '' ? 18 : Number(age);
     setAge(currentAge + 1);
@@ -142,28 +136,17 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
     setAge(Math.max(18, currentAge - 1));
   };
 
-  const incrementExperience = () => {
-    const currentExp = experience === '' ? 0 : Number(experience);
-    setExperience(currentExp + 1);
-  };
-
-  const decrementExperience = () => {
-    const currentExp = experience === '' ? 0 : Number(experience);
-    setExperience(Math.max(0, currentExp - 1));
-  };
-
   const handleSubmit = async () => {
     setValidationActive(true);
     setErrorMessage('');
 
-    const isEquipmentChosen = equipment && equipment !== 'Airsoft or real gun?';
+    const isEquipmentChosen = equipment && equipment !== 'Owned/Personal or Renting?';
 
     if (!firstName || !lastName || !isEmailValid() || accommodation === null || !isEquipmentChosen) {
       return;
     }
 
     const finalAge = age === '' ? 18 : Number(age);
-    const finalExperience = experience === '' ? 2 : Number(experience);
 
     setLoading(true);
 
@@ -178,7 +161,6 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           lastName,
           email,
           age: finalAge,
-          experience: finalExperience,
           equipment,
           accommodation,
         }),
@@ -233,8 +215,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
     setLastName('');
     setEmail('');
     setAge(18);
-    setExperience(2);
-    setEquipment('Airsoft or real gun?');
+    setEquipment('Owned/Personal or Renting?');
     setAccommodation(null);
     setValidationActive(false);
     setSuccess(false);
@@ -396,37 +377,10 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
         </View>
 
         <View style={[styles.formRow, { zIndex: 10 }]}>
-          <View style={[styles.fieldBlock, { flex: 1 }]}>
-            <Text style={styles.fieldLabel}>*Years of experience in this sport:</Text>
-            <View style={styles.spinnerContainer}>
-              <TextInput
-                style={styles.spinnerInput}
-                keyboardType="numeric"
-                value={String(experience)}
-                onChangeText={handleExperienceChange}
-                maxLength={2}
-                editable={!loading}
-              />
-              <View style={styles.spinnerArrows}>
-                <TouchableOpacity onPress={incrementExperience} disabled={loading} style={styles.arrowBtn}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 16 9" fill="none" style={{ transform: 'rotate(180deg)' }}>
-                    <path d="M0.75 0.749999L7.75 7.75L14.75 0.75" stroke="#CDD7D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={decrementExperience} disabled={loading} style={styles.arrowBtn}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 16 9" fill="none">
-                    <path d="M0.75 0.749999L7.75 7.75L14.75 0.75" stroke="#CDD7D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <Text style={styles.helpText}>If you don't have any, no problem, we'll teach you ;)</Text>
-          </View>
-
-          <View style={[styles.fieldBlock, { flex: 1.5 }]}>
+          <View style={[styles.fieldBlock, { flex: 1, minWidth: 260 }]}>
             <Text style={styles.fieldLabel}>*What are you bringing?</Text>
             {(() => {
-              const isEquipmentError = validationActive && equipment === 'Airsoft or real gun?';
+              const isEquipmentError = validationActive && (!equipment || equipment === 'Owned/Personal or Renting?');
               return (
                 <>
                   <TouchableOpacity
@@ -445,7 +399,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
 
                   {dropdownOpen && (
                     <View style={styles.dropdownMenu}>
-                      {['Airsoft gun', 'Real gun', 'Renting range equipment'].map((item) => (
+                      {['Owned/Personal', 'Renting'].map((item) => (
                         <TouchableOpacity
                           key={item}
                           style={[
@@ -476,10 +430,8 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
               );
             })()}
           </View>
-        </View>
 
-        <View style={[styles.formRow, { zIndex: 1 }]}>
-          <View style={[styles.fieldBlock, { flex: 1 }]}>
+          <View style={[styles.fieldBlock, { flex: 1.2, minWidth: 260 }]}>
             <Text style={styles.fieldLabel}>*Will you stay at the accommodation we propose?</Text>
 
             <View style={styles.selectorContainer}>

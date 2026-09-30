@@ -19,7 +19,7 @@ export async function onRequestOptions() {
 export async function onRequestPost({ request, env }) {
   try {
     const data = await request.json();
-    const { firstName, lastName, email, age, experience, equipment, accommodation } = data;
+    const { firstName, lastName, email, age, equipment, accommodation } = data;
 
     // Validate inputs
     if (!firstName || !lastName || !email || !email.includes('@')) {
@@ -50,8 +50,7 @@ export async function onRequestPost({ request, env }) {
       lastName: lastName.trim(),
       email: email.trim().toLowerCase(),
       age: Number(age) || 18,
-      experience: Number(experience) || 0,
-      equipment: equipment || 'Airsoft or real gun?',
+      equipment: equipment || 'Owned/Personal',
       accommodation: Boolean(accommodation),
       submittedAt: new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' }),
     };

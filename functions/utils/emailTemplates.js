@@ -72,10 +72,6 @@ export function buildConfirmationEmail({ from, to, userData }) {
                     <td style="font-weight: 600;">${userData.age} ani</td>
                   </tr>
                   <tr>
-                    <td style="color: #5E6B6A;">Experiență tir / IPSC:</td>
-                    <td style="font-weight: 600;">${userData.experience} ani</td>
-                  </tr>
-                  <tr>
                     <td style="color: #5E6B6A;">Opțiune echipament:</td>
                     <td style="font-weight: 600;">${userData.equipment}</td>
                   </tr>
@@ -86,14 +82,22 @@ export function buildConfirmationEmail({ from, to, userData }) {
                 </table>
               </div>
 
-              <p style="font-size: 15px; line-height: 160%; color: #374151; margin: 0 0 16px 0;">
-                <strong>Ce urmează?</strong><br>
-                Un reprezentant sau instructor AIPSC vă va contacta în scurt timp pe acest email sau telefonic pentru confirmarea finală a locului, orarul detaliat și instrucțiunile organizatorice.
+              <p style="font-size: 14px; line-height: 160%; color: #5E6B6A; margin: 0 0 16px 0; background-color: #F9FAFB; padding: 12px 16px; border-radius: 4px; border: 1px solid #E5E7EB;">
+                <em>Notă: Acest mesaj este trimis automat și nu permite răspuns direct (no-reply).</em>
               </p>
 
-              <p style="font-size: 14px; line-height: 160%; color: #5E6B6A; margin: 24px 0 0 0; border-top: 1px solid #E5E7EB; padding-top: 20px;">
-                Dacă aveți întrebări suplimentare între timp, ne puteți contacta direct la <a href="mailto:contact@aipsc.ro" style="color: #01223C; font-weight: 600; text-decoration: underline;">contact@aipsc.ro</a> sau răspunzând la acest mesaj.
-              </p>
+              <div style="background-color: #01223C; border-radius: 6px; padding: 20px 24px; margin-top: 24px; color: #FFFFFF;">
+                <p style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #BA9842;">Aveți întrebări sau asistență?</p>
+                <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 150%; color: #E2E8F0;">
+                  Puteți contacta direct un reprezentant al echipei noastre prin WhatsApp sau apel telefonic:
+                </p>
+                <a href="https://wa.me/40745629065" style="display: inline-block; background-color: #25D366; color: #091413; font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 4px; text-decoration: none; margin-right: 12px; margin-bottom: 8px;">
+                  💬 WhatsApp: +40 745 629 065
+                </a>
+                <a href="tel:+40745629065" style="display: inline-block; border: 1px solid #D0BC86; color: #D0BC86; font-weight: 600; font-size: 14px; padding: 9px 16px; border-radius: 4px; text-decoration: none;">
+                  📞 Tel: +40 745 629 065
+                </a>
+              </div>
             </td>
           </tr>
           <!-- Footer -->
@@ -145,8 +149,7 @@ export function buildAdminNotificationEmail({ from, to, userData, pdfBytes }) {
     <tr style="background: #F4F5F4;"><td style="font-weight: bold; width: 40%; border-bottom: 1px solid #E5E7EB;">Nume complet:</td><td style="border-bottom: 1px solid #E5E7EB;">${userData.firstName} ${userData.lastName}</td></tr>
     <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Email:</td><td style="border-bottom: 1px solid #E5E7EB;"><a href="mailto:${userData.email}">${userData.email}</a></td></tr>
     <tr style="background: #F4F5F4;"><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Vârstă:</td><td style="border-bottom: 1px solid #E5E7EB;">${userData.age} ani</td></tr>
-    <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Experiență IPSC:</td><td style="border-bottom: 1px solid #E5E7EB;">${userData.experience} ani</td></tr>
-    <tr style="background: #F4F5F4;"><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Echipament:</td><td style="border-bottom: 1px solid #E5E7EB;"><strong>${userData.equipment}</strong></td></tr>
+    <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Echipament:</td><td style="border-bottom: 1px solid #E5E7EB;"><strong>${userData.equipment}</strong></td></tr>
     <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Cazare Casa Romană:</td><td style="border-bottom: 1px solid #E5E7EB;">${accommodationText}</td></tr>
     <tr style="background: #F4F5F4;"><td style="font-weight: bold;">Data recepționării:</td><td>${new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' })}</td></tr>
   </table>
