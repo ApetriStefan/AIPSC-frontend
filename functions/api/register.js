@@ -32,7 +32,7 @@ export async function onRequestPost({ request, env }) {
     // SMTP Credentials from Cloudflare Pages environment variables
     const host = env.ZOHO_SMTP_HOST || 'smtp.zoho.eu';
     const port = Number(env.ZOHO_SMTP_PORT || 465);
-    const user = env.ZOHO_SMTP_USER || 'register@aipsc.ro';
+    const user = env.ZOHO_SMTP_USER || 'contact@aipsc.ro';
     const pass = env.ZOHO_SMTP_PASS;
 
     if (!pass) {
@@ -68,7 +68,7 @@ export async function onRequestPost({ request, env }) {
 
     const adminMime = buildAdminNotificationEmail({
       from: user,
-      to: user, // send to register@aipsc.ro
+      to: user, // send to contact@aipsc.ro
       userData,
       pdfBytes,
     });
