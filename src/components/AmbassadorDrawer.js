@@ -12,7 +12,9 @@ import {
   ScrollView,
   PanResponder,
 } from 'react-native';
+import { COLORS } from '../constants/theme';
 import { styles } from '../styles/AmbassadorDrawer.styles';
+import { PrimaryButton } from './common/AppButton';
 
 const API_BASE_URL = Platform.OS === 'web' ? '' : 'http://localhost:8000'; // Empty string on web → requests hit /api/... on the live domain (Cloudflare Pages Functions)
 
@@ -245,10 +247,10 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
       <View style={[styles.successCenteredContent, !isDesktop && { paddingHorizontal: 24 }]}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 112 112" fill="none">
           <path d="M56 0L69.5493 19.3568C70.1735 20.2485 71.2579 20.6977 72.3298 20.5085L95.598 16.402L91.4915 39.6702C91.3023 40.7421 91.7515 41.8265 92.6432 42.4507L112 56L92.6432 69.5493C91.7515 70.1735 91.3023 71.2579 91.4915 72.3298L95.598 95.598L72.3298 91.4915C71.2579 91.3023 70.1735 91.7515 69.5493 92.6432L56 112L42.4507 92.6432C41.8265 91.7515 40.7421 91.3023 39.6702 91.4915L16.402 95.598L20.5085 72.3298C20.6977 71.2579 20.2485 70.1735 19.3568 69.5493L0 56L19.3568 42.4507C20.2485 41.8265 20.6977 40.7421 20.5085 39.6702L16.402 16.402L39.6702 20.5085C40.7421 20.6977 41.8265 20.2485 42.4507 19.3568L56 0Z" fill="url(#paint0_linear_amb_closed)"/>
-          <path d="M56 36V60M56 74H56.02" stroke="#01213B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M56 36V60M56 74H56.02" stroke="#01223C" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
           <defs>
             <linearGradient id="paint0_linear_amb_closed" x1="56" y1="0" x2="56" y2="112" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#AD9F7A"/>
+              <stop stopColor="#D0BC86"/>
               <stop offset="1" stopColor="#BA9842"/>
             </linearGradient>
           </defs>
@@ -261,9 +263,9 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
           The Ambassador referral program is currently paused. Please check back soon, or reach out to us at contact@aipsc.ro for details.
         </Text>
 
-        <TouchableOpacity style={styles.successHomeBtn} onPress={onClose}>
+        <PrimaryButton style={styles.successHomeBtn} onPress={onClose}>
           <Text style={styles.successHomeBtnText}>CLOSE</Text>
-        </TouchableOpacity>
+        </PrimaryButton>
       </View>
 
       <View style={styles.successFooter}>
@@ -278,10 +280,10 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
       <View style={styles.successCenteredContent}>
         <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
           <path d="M56 0L69.5493 19.3568C70.1735 20.2485 71.2579 20.6977 72.3298 20.5085L95.598 16.402L91.4915 39.6702C91.3023 40.7421 91.7515 41.8265 92.6432 42.4507L112 56L92.6432 69.5493C91.7515 70.1735 91.3023 71.2579 91.4915 72.3298L95.598 95.598L72.3298 91.4915C71.2579 91.3023 70.1735 91.7515 69.5493 92.6432L56 112L42.4507 92.6432C41.8265 91.7515 40.7421 91.3023 39.6702 91.4915L16.402 95.598L20.5085 72.3298C20.6977 71.2579 20.2485 70.1735 19.3568 69.5493L0 56L19.3568 42.4507C20.2485 41.8265 20.6977 40.7421 20.5085 39.6702L16.402 16.402L39.6702 20.5085C40.7421 20.6977 41.8265 20.2485 42.4507 19.3568L56 0Z" fill="url(#paint0_linear_85_1234)"/>
-          <path d="M65.3008 47.6L54.154 62.4624C53.9734 62.7029 53.7432 62.9017 53.4792 63.0456C53.2149 63.1895 52.9231 63.2749 52.6229 63.2962C52.3231 63.3175 52.0221 63.2738 51.7404 63.1688C51.4584 63.0635 51.2028 62.8992 50.99 62.6864L44.3008 56" stroke="#01213B" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M65.3008 47.6L54.154 62.4624C53.9734 62.7029 53.7432 62.9017 53.4792 63.0456C53.2149 63.1895 52.9231 63.2749 52.6229 63.2962C52.3231 63.3175 52.0221 63.2738 51.7404 63.1688C51.4584 63.0635 51.2028 62.8992 50.99 62.6864L44.3008 56" stroke="#01223C" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
           <defs>
             <linearGradient id="paint0_linear_85_1234" x1="56" y1="0" x2="56" y2="112" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#AD9F7A"/>
+              <stop stopColor="#D0BC86"/>
               <stop offset="1" stopColor="#BA9842"/>
             </linearGradient>
           </defs>
@@ -292,9 +294,9 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
           Thank you for your interest. We will send you a confirmation email with all the necessary information. We look forward to meeting you!
         </Text>
 
-        <TouchableOpacity style={styles.successHomeBtn} onPress={handleReset}>
+        <PrimaryButton style={styles.successHomeBtn} onPress={handleReset}>
           <Text style={styles.successHomeBtnText}>HOME</Text>
-        </TouchableOpacity>
+        </PrimaryButton>
       </View>
 
       <View style={styles.successFooter}>
@@ -345,7 +347,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             <TextInput
               style={[styles.input, validationActive && !firstName && styles.inputError]}
               placeholder="Ciprian"
-              placeholderTextColor="#4E6578"
+              placeholderTextColor={COLORS.textMuted}
               value={firstName}
               onChangeText={setFirstName}
               editable={!loading}
@@ -357,7 +359,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             <TextInput
               style={[styles.input, validationActive && !lastName && styles.inputError]}
               placeholder="Cipri"
-              placeholderTextColor="#4E6578"
+              placeholderTextColor={COLORS.textMuted}
               value={lastName}
               onChangeText={setLastName}
               editable={!loading}
@@ -369,7 +371,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             <TextInput
               style={[styles.input, validationActive && !isEmailValid() && styles.inputError]}
               placeholder="ciprian.cipri@gmail.com"
-              placeholderTextColor="#4E6578"
+              placeholderTextColor={COLORS.textMuted}
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
@@ -392,10 +394,10 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             {referralList.map((item, index) => (
               <View key={item.id} style={{ marginBottom: index === referralList.length - 1 ? 0 : 20 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <Text style={[styles.fieldLabel, { color: '#8E8E93' }]}>Person #{index + 1}:</Text>
+                  <Text style={[styles.fieldLabel, { color: COLORS.textMuted }]}>Person #{index + 1}:</Text>
                   {index > 0 && !loading && (
                     <TouchableOpacity onPress={() => openConfirmDelete(item.id)} style={{ padding: 4 }}>
-                      <Text style={{ color: '#D93838', fontWeight: 'bold', fontSize: 13 }}>✕ Remove</Text>
+                      <Text style={{ color: COLORS.error, fontWeight: 'bold', fontSize: 13 }}>✕ Remove</Text>
                     </TouchableOpacity>
                   )}
                 </View>
@@ -408,7 +410,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
                         validationActive && !item.firstName && styles.inputError
                       ]}
                       placeholder="First Name"
-                      placeholderTextColor="#4E6578"
+                      placeholderTextColor={COLORS.textMuted}
                       value={item.firstName}
                       onChangeText={(val) => updateReferral(item.id, 'firstName', val)}
                       editable={!loading}
@@ -422,7 +424,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
                         validationActive && !item.lastName && styles.inputError
                       ]}
                       placeholder="Last Name"
-                      placeholderTextColor="#4E6578"
+                      placeholderTextColor={COLORS.textMuted}
                       value={item.lastName}
                       onChangeText={(val) => updateReferral(item.id, 'lastName', val)}
                       editable={!loading}
@@ -436,7 +438,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
                         validationActive && (!item.email || !item.email.includes('@') || !item.email.includes('.')) && styles.inputError
                       ]}
                       placeholder="Email Address"
-                      placeholderTextColor="#4E6578"
+                      placeholderTextColor={COLORS.textMuted}
                       value={item.email}
                       onChangeText={(val) => updateReferral(item.id, 'email', val)}
                       autoCapitalize="none"
@@ -482,7 +484,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
           <Text style={styles.policyLink} onPress={() => onOpenPolicy('terms')}>Terms and conditions</Text>.
         </Text>
 
-        <TouchableOpacity
+        <PrimaryButton
           style={[styles.submitBtn, !isDesktop && styles.mobileSubmitBtn, loading && { opacity: 0.7 }]}
           onPress={handleSubmit}
           disabled={loading}
@@ -490,7 +492,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
           <Text style={styles.submitBtnText}>
             {loading ? 'SUBMITTING...' : 'SUBMIT'}
           </Text>
-        </TouchableOpacity>
+        </PrimaryButton>
       </View>
     </ScrollView>
   );

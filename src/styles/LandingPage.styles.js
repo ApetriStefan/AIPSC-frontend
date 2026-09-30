@@ -47,14 +47,14 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: '125%',
     fontWeight: '600',
-    color: '#091413',
+    color: COLORS.textDark,
   },
   mobileMainTitle: {
     fontFamily: FONTS.serif,
     fontSize: 32,
     lineHeight: '125%',
     fontWeight: '600',
-    color: '#091413',
+    color: COLORS.textDark,
   },
   badgeWrapper: {
     flexDirection: 'row',
@@ -62,14 +62,14 @@ export const styles = StyleSheet.create({
     marginTop: 8,
   },
   badge: {
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 4,
     alignSelf: 'flex-start',
   },
   badgeText: {
-    color: '#091413',
+    color: COLORS.textDark,
     fontFamily: FONTS.sansSerif,
     fontSize: 12,
     fontWeight: '500',
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     color: COLORS.textDark,
   },
   highlightLink: {
-    color: '#011B36',
+    color: COLORS.darkNavy,
     fontWeight: '600',
     textDecorationLine: 'underline',
     cursor: 'pointer',
@@ -129,17 +129,18 @@ export const styles = StyleSheet.create({
   },
   previewCard: {
     marginTop: 32,
-    backgroundColor: '#CDD7D6',
+    backgroundColor: COLORS.tealCard,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#A3AFAE',
+    borderColor: COLORS.tealBorder,
     padding: 24,
     width: '100%',
     maxWidth: 680,
     ...Platform.select({
       web: {
-        backgroundImage: `url(${require('../../assets/images/grainy-background.svg')})`,
+        backgroundImage: `url(${require('../../assets/images/grainy-background.png')})`,
         backgroundRepeat: 'repeat',
+        backgroundSize: '180px 180px',
       }
     }),
   },
@@ -150,27 +151,30 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
   previewTag: {
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 4,
   },
   previewTagText: {
-    color: '#091413',
+    color: COLORS.textDark,
     fontFamily: FONTS.sansSerif,
-    fontSize: 11,
-    fontWeight: '500',
+    fontSize: 12,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+    textTransform: 'uppercase',
   },
-  previewPlaces: {
-    color: '#4E6578',
+  previewSeats: {
     fontFamily: FONTS.sansSerif,
     fontSize: 13,
+    color: COLORS.textMuted,
+    fontStyle: 'italic',
   },
   previewTitle: {
     fontFamily: FONTS.serif,
     fontSize: 22,
     fontWeight: '600',
-    color: '#091413',
+    color: COLORS.textDark,
     marginBottom: 6,
   },
   previewLocation: {

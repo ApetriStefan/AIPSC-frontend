@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, useWindowDimensions, Animated, Platform, ScrollView, Linking } from 'react-native';
 import { styles } from '../styles/Costs.styles';
+import { SecondaryButton, GhostButton } from './common/AppButton';
 
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Hotel_Review-g15019690-d6959182-Reviews-Casa_Romana-Moigrad_Porolissum_Salaj_County_Northwest_Romania_Transylvania.html';
 
@@ -166,10 +167,13 @@ export default function Costs({ leftColWidth, onOpenRegister }) {
             </Text>
 
             <View style={styles.mobileActionRow}>
-              <TouchableOpacity style={styles.mobileRegisterBtn} onPress={onOpenRegister}>
+              <SecondaryButton 
+                style={styles.mobileRegisterBtn} 
+                onPress={onOpenRegister}
+              >
                 <Text style={styles.mobileRegisterBtnText}>REGISTER NOW</Text>
                 <Image source={require('../../assets/images/finger-pad-white.svg')} style={styles.mobileRegisterIcon} />
-              </TouchableOpacity>
+              </SecondaryButton>
               <Text style={styles.mobilePlacesLeftText}>Places left: 10</Text>
             </View>
           </View>
@@ -223,13 +227,11 @@ export default function Costs({ leftColWidth, onOpenRegister }) {
 
             {/* Link label below carousel */}
             <View style={styles.mobileLinkWrapper}>
-              <TouchableOpacity onPress={() => Linking.openURL(TRIPADVISOR_URL)} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={styles.mobileLinkLabel}>See Accommodation</Text>
-                <Image 
-                  source={require('../../assets/images/arrow-top-right-corner.svg')} 
-                  style={styles.mobileLinkArrow} 
-                />
-              </TouchableOpacity>
+              <GhostButton 
+                onPress={() => Linking.openURL(TRIPADVISOR_URL)}
+                text="See Accommodation"
+                textStyle={styles.mobileLinkLabel}
+              />
             </View>
           </View>
 
@@ -330,12 +332,18 @@ export default function Costs({ leftColWidth, onOpenRegister }) {
             </View>
           </View>
 
-          <View style={styles.actionRow}>
-            <TouchableOpacity style={styles.registerBtn} onPress={onOpenRegister}>
-              <Text style={styles.registerBtnText}>REGISTER NOW</Text>
-              <Image source={require('../../assets/images/finger-pad-white.svg')} style={styles.registerIcon} />
-            </TouchableOpacity>
-            <Text style={styles.placesLeftText}>Places left: 10</Text>
+          <View style={styles.actionGridRow}>
+            <View style={styles.gridLeft} />
+            <View style={styles.actionContentRow}>
+              <SecondaryButton 
+                style={styles.registerBtn} 
+                onPress={onOpenRegister}
+              >
+                <Text style={styles.registerBtnText}>REGISTER NOW</Text>
+                <Image source={require('../../assets/images/finger-pad-white.svg')} style={styles.registerIcon} />
+              </SecondaryButton>
+              <Text style={styles.placesLeftText}>Places left: 10</Text>
+            </View>
           </View>
         </View>
 
@@ -356,7 +364,7 @@ export default function Costs({ leftColWidth, onOpenRegister }) {
 
           <View style={styles.gridRow}>
             <View style={styles.gridLeft}>
-              <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'baseline', flexWrap: 'nowrap' }}>
                 <KernedPrice value="50eur" style={styles.priceBig} />
                 <Text style={styles.priceUnit}> per night</Text>
               </View>
@@ -436,13 +444,11 @@ export default function Costs({ leftColWidth, onOpenRegister }) {
 
           {/* Link label below carousel */}
           <View style={styles.linkWrapper}>
-            <TouchableOpacity onPress={() => Linking.openURL(TRIPADVISOR_URL)} style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={styles.linkLabel}>See Accommodation</Text>
-              <Image 
-                source={require('../../assets/images/arrow-top-right-corner.svg')} 
-                style={styles.linkArrow} 
-              />
-            </TouchableOpacity>
+            <GhostButton 
+              onPress={() => Linking.openURL(TRIPADVISOR_URL)}
+              text="See Accommodation"
+              textStyle={styles.linkLabel}
+            />
           </View>
         </View>
 
@@ -460,20 +466,7 @@ export default function Costs({ leftColWidth, onOpenRegister }) {
               <KernedPrice value="190eur" style={styles.priceBig} />
             </View>
             <View style={styles.gridRight}>
-              <Text style={[styles.descTitle]}>
-                *recommended, but you can accommodate wherever you want
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.rowDivider} />
-
-          <View style={styles.gridRow}>
-            <View style={styles.gridLeft}>
-              <Text style={styles.noteLabel}>Important note:</Text>
-            </View>
-            <View style={styles.gridRight}>
-              <Text style={styles.noteText}>
+              <Text style={styles.descTitle}>
                 Includes gun, belt, pouches, holster, eyes & ear protection + 350 rounds
               </Text>
             </View>

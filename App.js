@@ -17,6 +17,7 @@ import Hero from './src/components/Hero';
 import Instructors from './src/components/Instructors';
 import Experience from './src/components/Experience';
 import CourseDetails from './src/components/CourseDetails';
+import TopRegistrationBanner from './src/components/TopRegistrationBanner';
 import Requirements from './src/components/Requirements';
 import Opportunities from './src/components/Opportunities';
 import Costs from './src/components/Costs';
@@ -394,6 +395,12 @@ export default function App() {
 
           {renderedMode !== 'member-coming-soon' && (
             <>
+              <TopRegistrationBanner leftColWidth={leftColWidth} mainContentWidth={mainContentWidth} onOpenRegister={() => setRegisterVisible(true)} />
+
+              <View onLayout={captureSectionLayout('costs')}>
+                <Costs leftColWidth={leftColWidth} onOpenRegister={() => setRegisterVisible(true)} />
+              </View>
+
               <View onLayout={captureSectionLayout('course')}>
                 <CourseDetails leftColWidth={leftColWidth} mainContentWidth={mainContentWidth} onOpenRegister={() => setRegisterVisible(true)} />
               </View>
@@ -402,10 +409,6 @@ export default function App() {
 
               <View onLayout={captureSectionLayout('opportunities')}>
                 <Opportunities leftColWidth={leftColWidth} onNavigateToMemberComingSoon={() => handleNavigate('member-coming-soon')} />
-              </View>
-
-              <View onLayout={captureSectionLayout('costs')}>
-                <Costs leftColWidth={leftColWidth} onOpenRegister={() => setRegisterVisible(true)} />
               </View>
 
               <View onLayout={captureSectionLayout('schedule')}>
@@ -458,7 +461,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sharedOuterContainer: {
-    backgroundColor: COLORS.lightBg,
+    backgroundColor: COLORS.white,
     paddingHorizontal: '6%',
   },
   leftColumn: {

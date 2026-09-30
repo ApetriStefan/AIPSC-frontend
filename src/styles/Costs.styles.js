@@ -8,8 +8,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: '6%',
     ...Platform.select({
       web: {
-        backgroundImage: `url(${require('../../assets/images/grainy-background.svg')})`,
+        backgroundImage: `url(${require('../../assets/images/grainy-background.png')})`,
         backgroundRepeat: 'repeat',
+        backgroundSize: '180px 180px',
       }
     }),
   },
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
     minWidth: 284,
     maxWidth: 364,
     borderRightWidth: 2,
-    borderRightColor: '#A3AFAE',
+    borderRightColor: COLORS.tealBorder,
     paddingRight: 24,
     paddingBottom: 60,
   },
@@ -30,19 +31,19 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.serif,
     fontSize: 32,
     fontWeight: '700',
-    color: '#000000',
+    color: COLORS.textDark,
   },
   sidebarSecondWord: {
     fontFamily: FONTS.serif,
     fontSize: 32,
     fontWeight: '700',
-    color: '#8E8E93',
+    color: COLORS.textMuted,
     marginTop: 4,
   },
   mainColumn: {
     flex: 1,
     width: '100%',
-    paddingVertical: 60,
+    paddingTop: 60,
   },
 
   /* Mobile Sticky Title (replaces left column on mobile) */
@@ -55,13 +56,14 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     zIndex: 100,
     borderBottomWidth: 1,
-    borderBottomColor: '#A3AFAE',
+    borderBottomColor: COLORS.tealBorder,
     marginLeft: -20,
     paddingLeft: 20,
     ...Platform.select({
       web: {
-        backgroundImage: `url(${require('../../assets/images/grainy-background.svg')})`,
+        backgroundImage: `url(${require('../../assets/images/grainy-background.png')})`,
         backgroundRepeat: 'repeat',
+        backgroundSize: '180px 180px',
       }
     }),
   },
@@ -69,14 +71,14 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.serif,
     fontSize: 28,
     fontWeight: '700',
-    color: '#000000',
+    color: COLORS.textDark,
     lineHeight: '125%',
   },
   mobileStickyTitleSecond: {
     fontFamily: FONTS.serif,
     fontSize: 28,
     fontWeight: '700',
-    color: '#8E8E93',
+    color: COLORS.textMuted,
     marginTop: 2,
     lineHeight: '125%',
   },
@@ -84,7 +86,7 @@ export const styles = StyleSheet.create({
   /* Section and Grid Layouts */
   sectionBlock: {
     width: '100%',
-    maxWidth: '80%',
+    maxWidth: 860,
     marginBottom: 60,
     gap: 20,
   },
@@ -99,7 +101,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     bottom: 0,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderTopLeftRadius: 4,
@@ -119,7 +121,7 @@ export const styles = StyleSheet.create({
   },
   tagSeparatorLine: {
     height: 1.5,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     width: '100%',
     position: 'absolute',
     left: 0,
@@ -130,18 +132,21 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 24,
+    width: '100%',
   },
   gridLeft: {
-    width: 200,
-    marginRight: 200,
+    width: 250,
+    minWidth: 240,
+    maxWidth: 280,
+    flexShrink: 0,
   },
   gridRight: {
     flex: 1,
-    width: 300,
+    minWidth: 220,
   },
   rowDivider: {
     height: 1,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     width: '100%',
     marginVertical: 4,
   },
@@ -150,22 +155,24 @@ export const styles = StyleSheet.create({
   priceBig: {
     fontFamily: FONTS.numbers,
     fontSize: 58,
-    // marginright: '5%',
     fontWeight: '700',
     lineHeight: '100%',
     color: COLORS.textDark,
-    // gap: 36,
+    ...Platform.select({
+      web: {
+        whiteSpace: 'nowrap',
+      }
+    }),
   },
   priceUnit: {
-    marginLeft: '15%',
-    minWidth: 100,
+    marginLeft: 8,
     fontSize: 16,
     color: COLORS.textMuted,
     fontWeight: '400',
     lineHeight: '150%',
   },
   descTitle: {
-    fontFamily:  FONTS.sansSerif,
+    fontFamily: FONTS.sansSerif,
     fontSize: 24,
     fontWeight: '400',
     color: COLORS.textDark,
@@ -194,19 +201,33 @@ export const styles = StyleSheet.create({
   },
 
   /* Action Buttons & Badges */
+  actionGridRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 24,
+    width: '100%',
+    marginTop: 8,
+  },
+  actionContentRow: {
+    flex: 1,
+    minWidth: 220,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+    flexWrap: 'wrap',
+  },
   actionRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
     marginTop: 8,
+    flexWrap: 'wrap',
   },
   registerBtn: {
     height: 48,
     minWidth: 205,
     backgroundColor: COLORS.navy,
-    // paddingVertical: 10,
     paddingHorizontal: 24,
-    marginLeft: 420,
     borderRadius: 4,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -260,9 +281,9 @@ export const styles = StyleSheet.create({
     flexShrink: 0,
     aspectRatio: 386 / 255,
     borderRadius: 4,
-    backgroundColor: '#CFD6D9',
+    backgroundColor: COLORS.tealCard,
     borderWidth: 1,
-    borderColor: '#A3AFAE',
+    borderColor: COLORS.tealBorder,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -314,8 +335,9 @@ export const styles = StyleSheet.create({
     width: '100%',
     ...Platform.select({
       web: {
-        backgroundImage: `url(${require('../../assets/images/grainy-background.svg')})`,
+        backgroundImage: `url(${require('../../assets/images/grainy-background.png')})`,
         backgroundRepeat: 'repeat',
+        backgroundSize: '180px 180px',
       }
     }),
   },
@@ -353,7 +375,7 @@ export const styles = StyleSheet.create({
   },
   mobileRowDivider: {
     height: 1.5,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     width: '100%',
     marginVertical: 8,
   },
@@ -414,7 +436,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     bottom: 0,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderTopLeftRadius: 4,
@@ -431,7 +453,7 @@ export const styles = StyleSheet.create({
   },
   mobileTagSeparatorLine: {
     height: 1.5,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     width: '100%',
     position: 'absolute',
     left: 0,
@@ -460,7 +482,7 @@ export const styles = StyleSheet.create({
   mobileCarouselPlaceholderImage: {
     width: 280,
     height: 180,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: COLORS.tealCard,
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
@@ -513,7 +535,7 @@ export const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: 1.5,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     zIndex: 200,
   },
 });

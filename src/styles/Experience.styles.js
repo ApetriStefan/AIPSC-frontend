@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '600',
     lineHeight: '125%',
-    color: '#091413',
+    color: COLORS.textDark,
   },
   mobileSubtitle: {
     fontFamily: FONTS.sansSerif,
@@ -105,7 +105,7 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: '125%',
-    color: '#546261',
+    color: COLORS.textMuted,
     marginTop: 8,
     marginBottom: 16,
   },
@@ -115,7 +115,7 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: '145%',
-    color: '#091413',
+    color: COLORS.textDark,
     paddingBottom: 16,
   },
   mobileDivider: {
@@ -150,6 +150,6 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: '145%',
-    color: '#091413',
+    color: COLORS.textDark,
   },
 });

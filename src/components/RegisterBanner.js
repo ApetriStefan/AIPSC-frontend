@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { styles } from '../styles/RegisterBanner.styles';
+import { PrimaryButton } from './common/AppButton';
 
 export default function RegisterBanner({ onOpenRegister }) {
   const { width } = useWindowDimensions();
@@ -21,7 +22,10 @@ export default function RegisterBanner({ onOpenRegister }) {
 
             <View style={styles.mobileBannerActionRow}>
               {/* Action triggers RegisterDrawer */}
-              <TouchableOpacity style={styles.mobileBannerBtn} onPress={onOpenRegister}>
+              <PrimaryButton 
+                style={styles.mobileBannerBtn} 
+                onPress={onOpenRegister}
+              >
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                   <Text style={styles.mobileBannerBtnText}>REGISTER NOW</Text>
                   <Image
@@ -29,7 +33,7 @@ export default function RegisterBanner({ onOpenRegister }) {
                     style={styles.mobileBannerIcon}
                   />
                 </View>
-              </TouchableOpacity>
+              </PrimaryButton>
               <Text style={styles.mobileBannerLimitText}>*limited at 20 people</Text>
             </View>
           </View>
@@ -52,7 +56,10 @@ export default function RegisterBanner({ onOpenRegister }) {
 
           <View style={styles.bannerActionRow}>
             {/* Action triggers RegisterDrawer */}
-            <TouchableOpacity style={styles.bannerBtn} onPress={onOpenRegister}>
+            <PrimaryButton 
+              style={styles.bannerBtn} 
+              onPress={onOpenRegister}
+            >
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                 <Text style={styles.bannerBtnText}>REGISTER NOW</Text>
                 <Image
@@ -60,7 +67,7 @@ export default function RegisterBanner({ onOpenRegister }) {
                   style={styles.bannerIcon}
                 />
               </View>
-            </TouchableOpacity>
+            </PrimaryButton>
             <Text style={styles.bannerLimitText}>*limited at 20 people</Text>
           </View>
         </View>

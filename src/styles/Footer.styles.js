@@ -181,7 +181,7 @@ export const styles = StyleSheet.create({
   /* Bottom Metadata Bar */
   bottomBar: { 
     borderTopWidth: 1, 
-    borderTopColor: '#456D89', 
+    borderTopColor: COLORS.steelNavy, 
     paddingTop: 18, 
     flexDirection: 'row', 
     flexWrap: 'wrap', 
@@ -198,27 +198,27 @@ export const styles = StyleSheet.create({
     gap: 12 
   },
   legalLabel: { 
-    color: '#456D89', 
+    color: COLORS.steelNavy, 
     fontSize: 16, 
     fontWeight: '500',
     lineHeight: '125%',
     marginRight: 4,
   },
   legalLink: { 
-    color: '#113E5E', 
+    color: COLORS.steelNavy, 
     fontSize: 16, 
     fontWeight: '400',
     lineHeight: '125%',
   },
   legalSeparator: { 
-    color: '#113E5E', 
+    color: COLORS.steelNavy, 
     fontSize: 16, 
     fontWeight: '400',
     lineHeight: '145%',
     marginHorizontal: 2 
   },
   copyright: { 
-    color: '#113E5E', 
+    color: COLORS.steelNavy, 
     fontSize: 16, 
     fontWeight: '500',
     lineHeight: '125%',
@@ -427,20 +427,20 @@ export const styles = StyleSheet.create({
   mobileLegalLabel: {
     paddingTop: 28,
 
-    color: '#456D89',
+    color: COLORS.steelNavy,
     fontSize: 16,
     fontWeight: '500',
     lineHeight: '125%',
     marginBottom: 4,
   },
   mobileLegalLink: {
-    color: '#113E5E',
+    color: COLORS.steelNavy,
     fontSize: 16,
     fontWeight: '400',
     lineHeight: '125%',
   },
   mobileLegalSeparator: {
-    color: '#113E5E',
+    color: COLORS.steelNavy,
     fontSize: 16,
     fontWeight: '400',
     lineHeight: '145%',
@@ -448,7 +448,7 @@ export const styles = StyleSheet.create({
   },
   mobileCopyright: {
     display: 'none',
-    color: '#7998AF',
+    color: COLORS.steelNavy,
     fontSize: 14,
     fontWeight: '500',
     lineHeight: '125%',

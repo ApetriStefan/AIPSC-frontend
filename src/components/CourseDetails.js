@@ -39,153 +39,6 @@ function findScrollParent(node) {
   return window;
 }
 
-const slides = [
-  { source: require('../../assets/images/accomodation/hotel-casa-romana.png'), resizeMode: 'cover' },
-  { source: require('../../assets/images/accomodation/hotel-casa-romana2.png'), resizeMode: 'cover' },
-  { source: require('../../assets/images/equipment/canik-rival-s.jpg'), resizeMode: 'contain' },
-  { source: require('../../assets/images/equipment/cz-75.jpg'), resizeMode: 'contain' },
-];
-
-// The event card placed at the top of the right content column
-function EventCard({ isDesktop, onOpenRegister }) {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [nextSlideIndex, setNextSlideIndex] = useState(1);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
-  const nextFadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    if (!isDesktop) return;
-
-    const interval = setInterval(() => {
-      const upcomingIndex = (currentSlideIndex + 1) % slides.length;
-      setNextSlideIndex(upcomingIndex);
-
-      Animated.parallel([
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration: 400,
-          easing: Easing.ease,
-          useNativeDriver: Platform.OS !== 'web',
-        }),
-        Animated.timing(nextFadeAnim, {
-          toValue: 1,
-          duration: 400,
-          easing: Easing.ease,
-          useNativeDriver: Platform.OS !== 'web',
-        }),
-      ]).start(() => {
-        setCurrentSlideIndex(upcomingIndex);
-        fadeAnim.setValue(1);
-        nextFadeAnim.setValue(0);
-      });
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [currentSlideIndex, fadeAnim, nextFadeAnim, isDesktop]);
-
-  if (!isDesktop) {
-    return (
-      <View style={styles.mobileEventCard}>
-        {/* Grainy overlay */}
-        <View style={styles.mobileGrainyOverlay} />
-
-        {/* Background image */}
-        {/* <View style={styles.mobileImageBackgroundContainer}>
-          <View style={{ overflow: 'hidden', width: '100%', height: '100%' }}>
-            <Image
-              source={require('../../assets/images/hotel-casa-romana.png')}
-              style={styles.mobileEventCardImage}
-            />
-          </View>
-          <View style={styles.mobileFadeGradient} />
-        </View> */}
-
-        {/* Foreground content */}
-        <View style={styles.mobileEventDetails}>
-          <View style={{ marginBottom: 4 }}>
-            <View style={styles.mobileTagRow}>
-              <View style={styles.mobileTagGold}>
-                <Text style={styles.mobileTagGoldText}>Upcoming event - 09/10/2026</Text>
-              </View>
-            </View>
-            <View style={styles.mobileTagDivider} />
-          </View>
-
-          <Text style={styles.mobileEventTitle}>
-            IPSC Safety & Competition Course, MISIA
-          </Text>
-
-          <Text style={styles.mobileEventLocation}>Zalău (Romania)</Text>
-
-          <TouchableOpacity style={styles.mobileEventBtn} onPress={onOpenRegister}>
-            <Text style={styles.mobileEventBtnText}>REGISTER NOW</Text>
-            <Image
-              source={require('../../assets/images/finger-pad-white.svg')}
-              style={styles.mobileEventBtnIcon}
-            />
-          </TouchableOpacity>
-          <Text style={styles.mobilePlacesLeftText}>Places left: 10</Text>
-        </View>
-      </View>
-    );
-  }
-
-  // Desktop version
-  return (
-    <View style={styles.eventCard}>
-      {/* Grainy overlay */}
-      <View style={styles.grainyOverlay} />
-
-      {/* Background image slideshow — right side */}
-      <View style={styles.imageBackgroundContainer}>
-        <View style={{ overflow: 'hidden', width: '100%', height: '100%', position: 'relative' }}>
-          <Animated.Image
-            source={slides[currentSlideIndex].source}
-            style={[
-              styles.eventCardImage,
-              { opacity: fadeAnim, resizeMode: slides[currentSlideIndex].resizeMode }
-            ]}
-          />
-          <Animated.Image
-            source={slides[nextSlideIndex].source}
-            style={[
-              styles.eventCardImage,
-              { opacity: nextFadeAnim, resizeMode: slides[nextSlideIndex].resizeMode }
-            ]}
-          />
-        </View>
-        <View style={styles.fadeGradient} />
-      </View>
-
-      {/* Foreground content — left side */}
-      <View style={styles.eventDetails}>
-        <View style={{ marginBottom: 4 }}>
-          <View style={styles.tagRow}>
-            <View style={styles.tagGold}>
-              <Text style={styles.tagGoldText}>Upcoming event - 09/10/2026</Text>
-            </View>
-            <Text style={styles.placesLeftText}>Places left: 10</Text>
-          </View>
-          <View style={styles.tagDivider} />
-        </View>
-
-        <Text style={styles.eventTitle}>
-          IPSC Safety & Competition Course, MISIA
-        </Text>
-
-        <Text style={styles.eventLocation}>Zalău (Romania)</Text>
-
-        <TouchableOpacity style={styles.eventBtn} onPress={onOpenRegister}>
-          <Text style={styles.eventBtnText}>REGISTER NOW</Text>
-          <Image
-            source={require('../../assets/images/finger-pad-white.svg')}
-            style={styles.eventBtnIcon}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-}
 
 export default function CourseDetails({ leftColWidth, mainContentWidth, onOpenRegister }) {
   const { height, width } = useWindowDimensions();
@@ -294,11 +147,6 @@ export default function CourseDetails({ leftColWidth, mainContentWidth, onOpenRe
 
           {/* Main Content Column */}
           <View style={styles.mainColumn}>
-            {/* Event Card — top of the right column, not sticky */}
-            <View style={[{ paddingLeft: 40, paddingRight: 0, paddingTop: 68, paddingBottom: 126 }, mainContentWidth ? { maxWidth: mainContentWidth } : null]}>
-              <EventCard isDesktop={true} onOpenRegister={onOpenRegister} />
-            </View>
-
             <View ref={setTitleRef}>
               <Text style={[
                 styles.sectionTitle,
@@ -351,11 +199,6 @@ export default function CourseDetails({ leftColWidth, mainContentWidth, onOpenRe
       <View style={styles.mobileVerticalBorder} />
 
       <View style={styles.mobileInnerContainer}>
-        {/* Event Card — top of the section on mobile */}
-        <View style={{ marginBottom: 32 }}>
-          <EventCard isDesktop={false} onOpenRegister={onOpenRegister} />
-        </View>
-
         <Text style={[styles.mobileSectionTitle, { marginBottom: 24 }]}>
           By the end of the course{"\n"}you will be able to:
         </Text>

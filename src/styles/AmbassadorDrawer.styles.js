@@ -92,7 +92,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     lineHeight: '124%',
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderTopLeftRadius: 4,
@@ -108,7 +108,7 @@ export const styles = StyleSheet.create({
   },
   headerLine: {
     height: 1.5,
-    backgroundColor: '#A3AFAE',
+    backgroundColor: COLORS.tealBorder,
     marginTop: -24,
   },
   mainTitle: {
@@ -133,14 +133,14 @@ export const styles = StyleSheet.create({
   },
   stepCard: {
     flex: 1,
-    backgroundColor: '#113E5E',
+    backgroundColor: COLORS.navyNavbar,
     borderRadius: 6,
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
     borderWidth: 1.5,
-    borderColor: '#2C2C35',
+    borderColor: COLORS.darkNavy,
   },
   stepNum: {
     fontFamily: FONTS.numbers,
@@ -167,7 +167,7 @@ export const styles = StyleSheet.create({
   },
   limitSubtext: {
     fontFamily: FONTS.sansSerif,
-    color: '#4E6578',
+    color: COLORS.textMuted,
     fontSize: 14,
     fontStyle: 'italic',
     lineHeight: '124%',
@@ -199,7 +199,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     backgroundColor: COLORS.darkNavy,
     borderWidth: 1.5,
-    borderColor: '#2C2C35',
+    borderColor: COLORS.darkNavy,
     borderRadius: 6,
     height: 48,
     paddingHorizontal: 16,
@@ -272,7 +272,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     lineHeight: '124%',
-    color: '#4E6578',
+    color: COLORS.textMuted,
     fontStyle: 'italic',
   },
   mobileAgreementText: {
@@ -285,13 +285,13 @@ export const styles = StyleSheet.create({
   },
   policyLink: {
     textDecorationLine: 'underline',
-    color: '#4E6578',
+    color: COLORS.textMuted,
     fontStyle: 'italic',
 
   },
   submitBtn: {
     marginRight: '10%',
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.border,
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 4,
@@ -335,7 +335,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   successText: {
-    color: '#8E8E93',
+    color: COLORS.textMuted,
     fontSize: 18,
     fontWeight: '400',
     lineHeight: '145%',
@@ -344,7 +344,7 @@ export const styles = StyleSheet.create({
     marginBottom: 64,
   },
   successHomeBtn: {
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.border,
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 4,
@@ -363,9 +363,9 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '6%',
     paddingBottom: 0,
-    backgroundColor: '#012138',
+    backgroundColor: COLORS.darkNavy,
     borderTopWidth: 1,
-    borderColor: '#456D89',
+    borderColor: COLORS.steelNavy,
     paddingTop: '2%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -375,20 +375,20 @@ export const styles = StyleSheet.create({
   },
   successFooterLabel: {
     fontFamily: FONTS.sansSerif,
-    color: '#4E6578',
+    color: COLORS.textMuted,
     fontSize: 16,
     fontWeight: '500',
     lineHeight: '125%',
   },
   successFooterLink: {
     fontFamily: FONTS.sansSerif,
-    color: '#265D82',
+    color: COLORS.steelNavy,
     fontSize: 16,
     fontWeight: '400',
     lineHeight: '125%',
   },
   successFooterSeparator: {
-    color: '#153A54',
+    color: COLORS.steelNavy,
     fontSize: 16,
   },
 
@@ -444,7 +444,7 @@ export const styles = StyleSheet.create({
   confirmModalBox: {
     width: '100%',
     maxWidth: 380,
-    backgroundColor: '#01213B',
+    backgroundColor: COLORS.navy,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.25)',
     borderRadius: 8,
@@ -508,7 +508,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     fontSize: 16,
     fontWeight: '600',
-    color: '#01213B',
+    color: COLORS.navy,
     letterSpacing: 0.5,
   },
 });

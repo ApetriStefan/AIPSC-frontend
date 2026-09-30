@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   bannerInnerBorder: {
     height: '100%',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.25)',
+    borderColor: COLORS.tealBorder,
     borderRadius: 4,
     overflow: 'hidden',
     flexDirection: 'row',
@@ -30,8 +30,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 16,
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.25)',
-    borderBottomColor: 'rgba(255, 255, 255, 0.25)',
+    borderRightColor: COLORS.tealBorder,
   },
   bannerTitle: {
     marginBottom: '24px',
@@ -121,7 +120,7 @@ export const styles = StyleSheet.create({
     height: '100%',
     borderWidth: 1,
     borderRightWidth: 0,
-    borderColor: 'rgba(255, 255, 255, 0.25)',
+    borderColor: COLORS.tealBorder,
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,

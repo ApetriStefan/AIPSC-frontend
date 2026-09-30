@@ -1,12 +1,13 @@
 // src/components/LandingPage.js
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, useWindowDimensions, Platform } from 'react-native';
+import { COLORS } from '../constants/theme';
 import { styles } from '../styles/LandingPage.styles';
+import { SecondaryButton } from './common/AppButton';
 
 export default function LandingPage({ mainContentWidth, onNavigateToCourses }) {
   const { width, height } = useWindowDimensions();
   const isDesktop = width >= 900;
-  const [btnHovered, setBtnHovered] = useState(false);
 
   // Available height excluding header on web
   const availableHeight = Platform.OS === 'web' ? 'calc(100vh - 80px)' : height - 80;
@@ -25,27 +26,22 @@ export default function LandingPage({ mainContentWidth, onNavigateToCourses }) {
           <Text style={styles.mainTitle}>Action Air IPSC{"\n"}Romania</Text>
         ) : (
           <View style={styles.mobileTitleRow}>
-            <Text style={[styles.mobileMainTitle, { flex: 1 }]}>Action Air IPSC{"\n"}Romania</Text>
-            <Image
-              source={require('../../assets/images/logo-bg.svg')}
-              style={styles.mobileHeroLogo}
-            />
+            <Image source={require('../../assets/images/logo-blue.svg')} style={styles.mobileHeroLogo} />
+            <Text style={styles.mobileMainTitle}>Action Air IPSC{"\n"}Romania</Text>
           </View>
         )}
 
         {/* Badge */}
         <View style={styles.badgeWrapper}>
           <View style={styles.badge}>
-            <Text style={styles.badgeText}>Under Construction</Text>
+            <Text style={styles.badgeText}>COMING SOON</Text>
           </View>
         </View>
 
         {/* Main Body Text */}
-        <View style={{ position: 'relative', zIndex: 50 }}>
+        <View style={{ maxWidth: 680 }}>
           <Text style={isDesktop ? styles.bodyText : styles.mobileBodyText}>
-            Our official website and AIPSC membership portal are currently under construction.
-            {"\n\n"}
-            In the meantime, explore our upcoming{' '}
+            Our official website and AIPSC membership portal are currently under construction. In the meantime, explore our upcoming{' '}
             <Text 
               style={styles.highlightLink}
               onPress={onNavigateToCourses}
@@ -57,22 +53,15 @@ export default function LandingPage({ mainContentWidth, onNavigateToCourses }) {
 
           {/* CTA Button */}
           <View style={styles.ctaRow}>
-            <TouchableOpacity 
-              style={[
-                styles.seeCoursesBtn,
-                btnHovered && { backgroundColor: '#01223C' }
-              ]} 
+            <SecondaryButton 
               onPress={onNavigateToCourses}
-              onMouseEnter={() => setBtnHovered(true)}
-              onMouseLeave={() => setBtnHovered(false)}
-              activeOpacity={0.85}
             >
               <Text style={styles.seeCoursesBtnText}>SEE OUR COURSES</Text>
               <Image 
                 source={require('../../assets/images/finger-pad-white.svg')} 
                 style={styles.btnIcon} 
               />
-            </TouchableOpacity>
+            </SecondaryButton>
           </View>
 
           {/* Course Preview Teaser Card */}

@@ -11,8 +11,11 @@ import {
   Platform,
   ScrollView,
   PanResponder,
+  Linking,
 } from 'react-native';
+import { COLORS } from '../constants/theme';
 import { styles } from '../styles/RegisterDrawer.styles';
+import { PrimaryButton } from './common/AppButton';
 
 const API_BASE_URL = Platform.OS === 'web' ? '' : 'http://localhost:8000'; // Empty string on web → requests hit /api/... on the live domain (Cloudflare Pages Functions)
 
@@ -186,13 +189,43 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
       if (response.ok) {
         setSuccess(true);
       } else {
-        setErrorMessage(data.detail || 'An unexpected error occurred during registration.');
+        setErrorMessage(data.detail || data.error || 'An unexpected error occurred during registration.');
       }
     } catch (err) {
-      setErrorMessage('Unable to reach local server. Check your backend status.');
+      setErrorMessage('Unable to connect to registration service. Please try again or contact us at contact@aipsc.ro.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleWhatsApp = async () => {
+    const phoneNumber = '40745629065';
+    const message = encodeURIComponent('Bună ziua! Doresc mai multe informații despre cursul IPSC din Zalău.');
+    const appUrl = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
+    const webUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    if (Platform.OS === 'web') {
+      if (typeof window !== 'undefined') {
+        window.open(webUrl, '_blank');
+      } else {
+        Linking.openURL(webUrl);
+      }
+    } else {
+      try {
+        const canOpen = await Linking.canOpenURL(appUrl);
+        if (canOpen) {
+          await Linking.openURL(appUrl);
+        } else {
+          await Linking.openURL(webUrl);
+        }
+      } catch (_) {
+        await Linking.openURL(webUrl);
+      }
+    }
+  };
+
+  const handleCall = () => {
+    Linking.openURL('tel:+40745629065');
   };
 
   const handleReset = () => {
@@ -211,17 +244,17 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
 
   if (!visible) return null;
 
-  const IS_TEMPORARILY_CLOSED = true;
+  const IS_TEMPORARILY_CLOSED = false;
 
   const closedView = (
     <View style={styles.successBlock}>
       <View style={[styles.successCenteredContent, !isDesktop && { paddingHorizontal: 24 }]}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 112 112" fill="none">
           <path d="M56 0L69.5493 19.3568C70.1735 20.2485 71.2579 20.6977 72.3298 20.5085L95.598 16.402L91.4915 39.6702C91.3023 40.7421 91.7515 41.8265 92.6432 42.4507L112 56L92.6432 69.5493C91.7515 70.1735 91.3023 71.2579 91.4915 72.3298L95.598 95.598L72.3298 91.4915C71.2579 91.3023 70.1735 91.7515 69.5493 92.6432L56 112L42.4507 92.6432C41.8265 91.7515 40.7421 91.3023 39.6702 91.4915L16.402 95.598L20.5085 72.3298C20.6977 71.2579 20.2485 70.1735 19.3568 69.5493L0 56L19.3568 42.4507C20.2485 41.8265 20.6977 40.7421 20.5085 39.6702L16.402 16.402L39.6702 20.5085C40.7421 20.6977 41.8265 20.2485 42.4507 19.3568L56 0Z" fill="url(#paint0_linear_reg_closed)"/>
-          <path d="M56 36V60M56 74H56.02" stroke="#01213B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M56 36V60M56 74H56.02" stroke="#01223C" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
           <defs>
             <linearGradient id="paint0_linear_reg_closed" x1="56" y1="0" x2="56" y2="112" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#AD9F7A"/>
+              <stop stopColor="#D0BC86"/>
               <stop offset="1" stopColor="#BA9842"/>
             </linearGradient>
           </defs>
@@ -234,9 +267,9 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           Course registrations are currently paused. Please check back soon for upcoming course dates, or contact us at contact@aipsc.ro for any inquiries.
         </Text>
 
-        <TouchableOpacity style={styles.successHomeBtn} onPress={onClose}>
+        <PrimaryButton style={styles.successHomeBtn} onPress={onClose}>
           <Text style={styles.successHomeBtnText}>CLOSE</Text>
-        </TouchableOpacity>
+        </PrimaryButton>
       </View>
 
       <View style={styles.successFooter}>
@@ -251,10 +284,10 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
       <View style={styles.successCenteredContent}>
         <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
           <path d="M56 0L69.5493 19.3568C70.1735 20.2485 71.2579 20.6977 72.3298 20.5085L95.598 16.402L91.4915 39.6702C91.3023 40.7421 91.7515 41.8265 92.6432 42.4507L112 56L92.6432 69.5493C91.7515 70.1735 91.3023 71.2579 91.4915 72.3298L95.598 95.598L72.3298 91.4915C71.2579 91.3023 70.1735 91.7515 69.5493 92.6432L56 112L42.4507 92.6432C41.8265 91.7515 40.7421 91.3023 39.6702 91.4915L16.402 95.598L20.5085 72.3298C20.6977 71.2579 20.2485 70.1735 19.3568 69.5493L0 56L19.3568 42.4507C20.2485 41.8265 20.6977 40.7421 20.5085 39.6702L16.402 16.402L39.6702 20.5085C40.7421 20.6977 41.8265 20.2485 42.4507 19.3568L56 0Z" fill="url(#paint0_linear_85_1234)"/>
-          <path d="M65.3008 47.6L54.154 62.4624C53.9734 62.7029 53.7432 62.9017 53.4792 63.0456C53.2149 63.1895 52.9231 63.2749 52.6229 63.2962C52.3231 63.3175 52.0221 63.2738 51.7404 63.1688C51.4584 63.0635 51.2028 62.8992 50.99 62.6864L44.3008 56" stroke="#01213B" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M65.3008 47.6L54.154 62.4624C53.9734 62.7029 53.7432 62.9017 53.4792 63.0456C53.2149 63.1895 52.9231 63.2749 52.6229 63.2962C52.3231 63.3175 52.0221 63.2738 51.7404 63.1688C51.4584 63.0635 51.2028 62.8992 50.99 62.6864L44.3008 56" stroke="#01223C" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
           <defs>
             <linearGradient id="paint0_linear_85_1234" x1="56" y1="0" x2="56" y2="112" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#AD9F7A"/>
+              <stop stopColor="#D0BC86"/>
               <stop offset="1" stopColor="#BA9842"/>
             </linearGradient>
           </defs>
@@ -265,22 +298,26 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           Thank you for your interest. We will send you a confirmation email with all the necessary information. We look forward to meeting you!
         </Text>
 
-        <TouchableOpacity style={styles.successHomeBtn} onPress={handleReset}>
+        <PrimaryButton style={styles.successHomeBtn} onPress={handleReset}>
           <Text style={styles.successHomeBtnText}>HOME</Text>
-        </TouchableOpacity>
+        </PrimaryButton>
       </View>
 
       <View style={styles.successFooter}>
-        <Text style={styles.successFooterLabel}>More info:</Text>
-        <Text style={styles.successFooterLink}>contact@aipsc.ro</Text>
+        <Text style={styles.successFooterLabel}>More info / Contact:</Text>
+        <TouchableOpacity onPress={() => Linking.openURL('mailto:contact@aipsc.ro')}>
+          <Text style={styles.successFooterLink}>contact@aipsc.ro</Text>
+        </TouchableOpacity>
         <Text style={styles.successFooterSeparator}>|</Text>
-        <Text style={styles.successFooterLink}>Ambassador Program</Text>
+        <TouchableOpacity onPress={handleWhatsApp} activeOpacity={0.8}>
+          <Text style={styles.successFooterLink}>WhatsApp: +40 745 629 065</Text>
+        </TouchableOpacity>
       </View>
     </View>
   ) : (
     <ScrollView contentContainerStyle={[styles.scrollForm, !isDesktop && { padding: 24 }]}>
       <View style={styles.headerBadges}>
-        <Text style={styles.badgeEvent}>Upcoming event - 24/06/2026</Text>
+        <Text style={styles.badgeEvent}>Upcoming event - 09/10/2026</Text>
         <Text style={styles.badgeSeats}>Places left: 10</Text>
       </View>
       <View style={styles.headerLine} />
@@ -296,7 +333,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
             <TextInput
               style={[styles.input, validationActive && !firstName && styles.inputError]}
               placeholder="Ciprian"
-              placeholderTextColor="#4E6578"
+              placeholderTextColor={COLORS.textMuted}
               value={firstName}
               onChangeText={setFirstName}
               editable={!loading}
@@ -308,7 +345,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
             <TextInput
               style={[styles.input, validationActive && !lastName && styles.inputError]}
               placeholder="Cipri"
-              placeholderTextColor="#4E6578"
+              placeholderTextColor={COLORS.textMuted}
               value={lastName}
               onChangeText={setLastName}
               editable={!loading}
@@ -320,7 +357,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
             <TextInput
               style={[styles.input, validationActive && !isEmailValid() && styles.inputError]}
               placeholder="ciprian.cipri@gmail.com"
-              placeholderTextColor="#4E6578"
+              placeholderTextColor={COLORS.textMuted}
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
@@ -510,7 +547,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           <Text style={styles.policyLink} onPress={() => onOpenPolicy('terms')}>Terms and conditions</Text>.
         </Text>
 
-        <TouchableOpacity
+        <PrimaryButton
           style={[styles.submitBtn, !isDesktop && styles.mobileSubmitBtn, loading && { opacity: 0.7 }]}
           onPress={handleSubmit}
           disabled={loading}
@@ -518,7 +555,41 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           <Text style={styles.submitBtnText}>
             {loading ? 'SUBMITTING...' : 'SUBMIT'}
           </Text>
-        </TouchableOpacity>
+        </PrimaryButton>
+      </View>
+
+      {/* Direct Contact / WhatsApp Section */}
+      <View style={[styles.directContactSection, !isDesktop && styles.mobileDirectContactSection]}>
+        <View style={[styles.directContactRow, !isDesktop && styles.mobileDirectContactRow]}>
+          <View style={{ gap: 2 }}>
+            <Text style={styles.directContactTitle}>Questions or need assistance?</Text>
+            <Text style={styles.directContactSub}>Get in touch directly with our team:</Text>
+          </View>
+
+          <View style={[styles.contactButtonsGroup, !isDesktop && styles.mobileContactButtonsGroup]}>
+            <TouchableOpacity 
+              style={styles.whatsappButton} 
+              onPress={handleWhatsApp}
+              activeOpacity={0.85}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#091413">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.541 1.944.828 3.018.828 3.181 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.199 1.584 5.952l-1.684 6.15 6.305-1.654c1.701.925 3.654 1.458 5.733 1.458 6.627 0 12-5.373 12-12s-5.373-12-12-12zm.062 21.6c-1.879 0-3.642-.533-5.141-1.454l-.368-.226-3.743.982.999-3.648-.248-.395c-1.026-1.635-1.567-3.535-1.567-5.49 0-5.748 4.673-10.422 10.424-10.422 5.751 0 10.424 4.674 10.424 10.422 0 5.749-4.673 10.422-10.424 10.422z"/>
+              </svg>
+              <Text style={styles.whatsappButtonText}>WhatsApp</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.telButton} 
+              onPress={handleCall}
+              activeOpacity={0.85}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D0BC86" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <Text style={styles.telButtonText}>+40 745 629 065</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </ScrollView>
   );

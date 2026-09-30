@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
   },
   bottomBar: {
     borderTopWidth: 1,
-    borderTopColor: '#456D89',
+    borderTopColor: COLORS.steelNavy,
     paddingTop: 18,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -67,20 +67,20 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   legalLabel: {
-    color: '#456D89',
+    color: COLORS.steelNavy,
     fontSize: 15,
     fontWeight: '500',
     lineHeight: '125%',
     marginRight: 4,
   },
   legalLink: {
-    color: '#113E5E',
+    color: COLORS.steelNavy,
     fontSize: 15,
     fontWeight: '400',
     lineHeight: '125%',
   },
   legalSeparator: {
-    color: '#113E5E',
+    color: COLORS.steelNavy,
     fontSize: 15,
     fontWeight: '400',
     lineHeight: '145%',
@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
   },
   copyright: {
     display: 'none',
-    color: '#113E5E',
+    color: COLORS.steelNavy,
     fontSize: 14,
     fontWeight: '500',
   },

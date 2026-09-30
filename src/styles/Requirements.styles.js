@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: COLORS.tealBorder,
     marginBottom: 57,
     width: '30%',
   },
@@ -181,7 +181,7 @@ export const styles = StyleSheet.create({
   },
   mobileDivider: {
     height: 1,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: COLORS.tealBorder,
     marginTop: 8,
     marginBottom: 20,
     width: '40%',

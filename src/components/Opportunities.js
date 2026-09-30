@@ -22,9 +22,9 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
   const getRow1Bg = () => {
     if (Platform.OS === 'web') {
       return {
-        backgroundImage: `linear-gradient(90deg, #CDD7D6 25%, rgba(205, 215, 214, 0.00) 65%), url(${require('../../assets/images/shooting-man-2.svg')})`,
+        backgroundImage: `linear-gradient(90deg, #CDD7D6 25%, rgba(205, 215, 214, 0.00) 60%), url(${require('../../assets/images/shooter-2.png')})`,
         backgroundPosition: 'left center, right center',
-        backgroundSize: '100% 100%, contain',
+        backgroundSize: '100% 100%, auto 100%',
         backgroundRepeat: 'no-repeat, no-repeat',
         backgroundColor: '#CDD7D6',
       };
@@ -32,26 +32,44 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
     return { backgroundColor: '#CDD7D6' };
   };
 
-  const getRow2Bg = () => {
+  const getRow2Bg = (isMobile = false) => {
     if (Platform.OS !== 'web' || activePathway === 'none') {
       return { backgroundColor: '#CDD7D6' };
     }
 
     if (activePathway === 'misia') {
+      if (isMobile) {
+        return {
+          backgroundImage: `linear-gradient(90deg, #CDD7D6 28%, rgba(205, 215, 214, 0.00) 65%), url(${require('../../assets/images/shooter-4.png')})`,
+          backgroundPosition: 'left center, right center',
+          backgroundSize: '100% 100%, cover',
+          backgroundRepeat: 'no-repeat, no-repeat',
+          backgroundColor: '#CDD7D6',
+        };
+      }
       return {
-        backgroundImage: `linear-gradient(90deg, #CDD7D6 30%, rgba(205, 215, 214, 0.00) 70%), url(${require('../../assets/images/shooting-man-4.png')})`,
-        backgroundPosition: 'left center, right top',
-        backgroundSize: '100% 100%, auto 120%',
+        backgroundImage: `linear-gradient(90deg, #CDD7D6 30%, rgba(205, 215, 214, 0.00) 65%), url(${require('../../assets/images/shooter-4.png')})`,
+        backgroundPosition: 'left center, right center',
+        backgroundSize: '100% 100%, auto 100%',
         backgroundRepeat: 'no-repeat, no-repeat',
         backgroundColor: '#CDD7D6',
       };
     }
 
     // activePathway === 'iroa'
+    if (isMobile) {
+      return {
+        backgroundImage: `linear-gradient(90deg, #CDD7D6 32%, rgba(205, 215, 214, 0.00) 70%), url(${require('../../assets/images/shooter-3.png')})`,
+        backgroundPosition: 'left center, right center',
+        backgroundSize: '100% 100%, cover',
+        backgroundRepeat: 'no-repeat, no-repeat',
+        backgroundColor: '#CDD7D6',
+      };
+    }
     return {
-      backgroundImage: `linear-gradient(90deg, #CDD7D6 45%, rgba(205, 215, 214, 0.00) 80%), url(${require('../../assets/images/shooting-man-3.png')})`,
+      backgroundImage: `linear-gradient(90deg, #CDD7D6 30%, rgba(205, 215, 214, 0.00) 65%), url(${require('../../assets/images/shooter-3.png')})`,
       backgroundPosition: 'left center, right center',
-      backgroundSize: '100% 100%, cover',
+      backgroundSize: '100% 100%, auto 100%',
       backgroundRepeat: 'no-repeat, no-repeat',
       backgroundColor: '#CDD7D6',
     };
@@ -89,21 +107,21 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
 
               {Platform.OS === 'web' ? (
                 <View style={[styles.mobileCard1BottomImage, {
-                  backgroundImage: `url(${require('../../assets/images/shooting-man-2.svg')})`,
+                  backgroundImage: `url(${require('../../assets/images/shooter-2.png')})`,
                   backgroundSize: 'cover',
-                  backgroundPosition: '80% center',
+                  backgroundPosition: 'right 20%',
                   backgroundRepeat: 'no-repeat',
                 }]} />
               ) : (
                 <Image
-                  source={require('../../assets/images/shooting-man-2.svg')}
+                  source={require('../../assets/images/shooter-2.png')}
                   style={styles.mobileCard1BottomImageNative}
                 />
               )}
             </TouchableOpacity>
 
             {/* Card 2: Pathway to become */}
-            <View style={[styles.mobileCard2Container, getRow2Bg()]}>
+            <View style={[styles.mobileCard2Container, getRow2Bg(true)]}>
               {activePathway === 'none' && (
                 <Image
                   source={require('../../assets/images/logo-grey.svg')}
@@ -178,7 +196,7 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
               {/* Opening quotes */}
               <View style={{ alignSelf: 'flex-start', marginBottom: 8 }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 42 26" fill="none">
-                  <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#02213A" strokeWidth="0.5"/>
+                  <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#01223C" strokeWidth="0.5"/>
                 </svg>
               </View>
 
@@ -193,7 +211,7 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
               {/* Closing quotes */}
               <View style={styles.mobileClosingQuotes}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="20" viewBox="0 0 42 26" fill="none" style={{ transform: 'rotate(180deg)' }}>
-                  <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#02213A" strokeWidth="0.5"/>
+                  <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#01223C" strokeWidth="0.5"/>
                 </svg>
               </View>
             </View>
@@ -340,7 +358,7 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
             ]}>
               {/* Opening quotes */}
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="26" viewBox="0 0 42 26" fill="none">
-                <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#02213A" strokeWidth="0.5"/>
+                <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#01223C" strokeWidth="0.5"/>
               </svg>
 
               <Text style={styles.quoteTextItalic}>
@@ -355,7 +373,7 @@ export default function Opportunities({ leftColWidth, onNavigateToMemberComingSo
               {!isDesktop && (
                 <View style={styles.mobileClosingQuotes}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="42" height="26" viewBox="0 0 42 26" fill="none" style={{ transform: 'rotate(180deg)' }}>
-                    <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#02213A" strokeWidth="0.5"/>
+                    <path d="M41.6191 0.25C40.4879 2.8529 39.3244 5.61424 38.1299 8.53418C36.8823 11.5839 35.6695 14.5644 34.4912 17.4756L34.4902 17.4785C33.406 20.257 32.4548 22.838 31.6348 25.2207H20.6553L20.333 24.3369C21.4296 21.8757 22.6952 19.2788 24.1299 16.5459C25.6527 13.7771 27.28 10.9733 29.0107 8.13477C30.7159 5.33828 32.3542 2.71023 33.9248 0.25H41.6191ZM21.4502 0.25C20.5961 2.21992 19.7118 4.25222 18.7959 6.3457L18.793 6.35156C17.8917 8.57018 16.9902 10.8235 16.0889 13.1113L16.0879 13.1152C15.2568 15.3314 14.4257 17.4782 13.5947 19.5557C12.7876 21.5734 12.0789 23.4621 11.4668 25.2207H0.50293L0.264648 24.3477C1.36281 21.8821 2.63078 19.2802 4.06836 16.542C5.52129 13.7745 7.07758 10.9719 8.73828 8.13477C10.4435 5.33828 12.0818 2.71023 13.6523 0.25H21.4502Z" fill="white" stroke="#01223C" strokeWidth="0.5"/>
                   </svg>
                 </View>
               )}

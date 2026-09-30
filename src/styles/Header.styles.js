@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: '6%',
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.borderDark,
+    borderBottomColor: COLORS.darkNavy,
     zIndex: 9999,
     elevation: 10,
   },
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   registerBtnText: {
-    color: '#091413',
+    color: COLORS.textDark,
     fontFamily: FONTS.sansSerif,
     fontWeight: '500',
     fontStyle: 'normal',
@@ -109,7 +109,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: '6%',
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.borderDark,
+    borderBottomColor: COLORS.darkNavy,
     backgroundColor: 'transparent',
   },
   mobileNavItemText: {

@@ -2,14 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, useWindowDimensions, Image, Pressable, Animated, Platform, Linking } from 'react-native';
 import { styles } from '../styles/Header.styles';
 import { COLORS } from '../constants/theme';
+import { PrimaryButton } from './common/AppButton';
 
 const AnimatedNavItem = ({ onPress, isHome, children }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
   const getBackgroundColor = () => {
-    if (isPressed) return '#011B36';
-    if (isHovered) return '#01223C';
+    if (isPressed) return COLORS.darkNavy;
+    if (isHovered) return COLORS.navy;
     return 'transparent';
   };
 
@@ -33,8 +34,8 @@ const AnimatedMobileNavItem = ({ onPress, children }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const getBackgroundColor = () => {
-    if (isPressed) return '#011B36';
-    if (isHovered) return '#01223C';
+    if (isPressed) return COLORS.darkNavy;
+    if (isHovered) return COLORS.navy;
     return 'transparent';
   };
 
@@ -169,19 +170,13 @@ export default function Header({
         {/* Right side: Register btn (desktop) | Hamburger (mobile) — only for /courses/ slug */}
         {currentRoute !== 'landing' && (
           isDesktop ? (
-            <TouchableOpacity 
-              style={[
-                styles.registerBtn,
-                isRegisterHovered && { backgroundColor: '#CABB91' }
-              ]} 
+            <PrimaryButton
               onPress={onOpenRegister}
-              onMouseEnter={() => setIsRegisterHovered(true)}
-              onMouseLeave={() => setIsRegisterHovered(false)}
-              activeOpacity={0.85}
+              style={{ height: 44, paddingVertical: 10, paddingHorizontal: 24 }}
             >
               <Text style={styles.registerBtnText}>REGISTER NOW</Text>
               <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
-            </TouchableOpacity>
+            </PrimaryButton>
           ) : (
             <TouchableOpacity
               style={styles.hamburgerBtn}
@@ -220,16 +215,16 @@ export default function Header({
 
           {/* Register row at the bottom of menu */}
           <View style={styles.mobileMenuRegisterRow}>
-            <TouchableOpacity
-              style={styles.mobileRegisterBtn}
+            <PrimaryButton
               onPress={() => {
                 setMenuOpen(false);
                 onOpenRegister();
               }}
+              style={{ height: 44, paddingVertical: 10, paddingHorizontal: 24 }}
             >
               <Text style={styles.registerBtnText}>REGISTER NOW</Text>
               <Image source={require('../../assets/images/finger-pad.svg')} style={styles.registerIcon} />
-            </TouchableOpacity>
+            </PrimaryButton>
             <Text style={styles.mobileMenuPlaces}>Places left: 10</Text>
           </View>
         </Animated.View>

@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
   contentCard: {
     marginTop: -24,
     position: 'relative',
-    backgroundColor: '#EEEEEE',
+    backgroundColor: COLORS.border,
     borderBottomRightRadius: 8,
     minHeight: 180,
     overflow: 'hidden',
@@ -191,7 +191,7 @@ export const styles = StyleSheet.create({
     bottom: 0,
     height: 70,
     pointerEvents: 'none',
-    backgroundImage: 'linear-gradient(180deg, rgba(244, 245, 247, 0) 0%, #F4F5F7 100%)',
+    backgroundImage: 'linear-gradient(180deg, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%)',
   },
   mobileHeaderRow: {
     flexDirection: 'row',
