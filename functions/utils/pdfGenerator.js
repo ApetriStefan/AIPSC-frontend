@@ -79,7 +79,7 @@ export async function generateRegistrationPdf(data) {
   page.drawText('LOCATION:', { x: 64, y: metaY + 26, size: 9, font: helveticaBold, color: cMuted });
   page.drawText('Zalau, Salaj, Romania', { x: 145, y: metaY + 26, size: 9, font: helvetica, color: cDark });
 
-  page.drawText('SUBMITTED:', { x: 64, y: metaY + 10, size: 9, font: helveticaBold, color: cMuted });
+  page.drawText('SUBMITTED:', { x: 62.5, y: metaY + 10, size: 9, font: helveticaBold, color: cMuted });
   page.drawText(data.submittedAt || new Date().toUTCString(), { x: 145, y: metaY + 10, size: 9, font: helvetica, color: cDark });
 
   // Section 1: Participant Information
@@ -105,6 +105,7 @@ export async function generateRegistrationPdf(data) {
   const rows1 = [
     { label: 'Full Name:', value: `${data.firstName || ''} ${data.lastName || ''}`.trim() },
     { label: 'Email Address:', value: data.email || '—' },
+    { label: 'Phone Number:', value: data.phone || '—' },
     { label: 'Age:', value: data.age ? `${data.age} years old` : '—' },
   ];
 

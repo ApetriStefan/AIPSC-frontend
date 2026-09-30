@@ -33,6 +33,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [age, setAge] = useState(18);
   const [equipment, setEquipment] = useState('Owned/Personal or Renting?');
   const [accommodation, setAccommodation] = useState(null);
@@ -121,6 +122,11 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
     return email.includes('@') && email.includes('.');
   };
 
+  const isPhoneValid = () => {
+    const cleaned = phone.replace(/[^0-9]/g, '');
+    return cleaned.length >= 7;
+  };
+
   const handleAgeChange = (val) => {
     const cleaned = val.replace(/[^0-9]/g, '');
     setAge(cleaned === '' ? '' : parseInt(cleaned, 10));
@@ -142,7 +148,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
 
     const isEquipmentChosen = equipment && equipment !== 'Owned/Personal or Renting?';
 
-    if (!firstName || !lastName || !isEmailValid() || accommodation === null || !isEquipmentChosen) {
+    if (!firstName || !lastName || !isEmailValid() || !isPhoneValid() || accommodation === null || !isEquipmentChosen) {
       return;
     }
 
@@ -160,6 +166,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           firstName,
           lastName,
           email,
+          phone,
           age: finalAge,
           equipment,
           accommodation,
@@ -214,6 +221,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
     setFirstName('');
     setLastName('');
     setEmail('');
+    setPhone('');
     setAge(18);
     setEquipment('Owned/Personal or Renting?');
     setAccommodation(null);
@@ -309,7 +317,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
 
       <View style={styles.formGrid}>
         <View style={[styles.formRow, { zIndex: 1 }]}>
-          <View style={styles.fieldBlock}>
+          <View style={[styles.fieldBlock, { flex: 1, minWidth: 140 }]}>
             <Text style={styles.fieldLabel}>*First Name:</Text>
             <TextInput
               style={[styles.input, validationActive && !firstName && styles.inputError]}
@@ -321,7 +329,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
             />
           </View>
 
-          <View style={styles.fieldBlock}>
+          <View style={[styles.fieldBlock, { flex: 1, minWidth: 140 }]}>
             <Text style={styles.fieldLabel}>*Last Name:</Text>
             <TextInput
               style={[styles.input, validationActive && !lastName && styles.inputError]}
@@ -333,23 +341,7 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
             />
           </View>
 
-          <View style={styles.fieldBlock}>
-            <Text style={styles.fieldLabel}>*E-mail:</Text>
-            <TextInput
-              style={[styles.input, validationActive && !isEmailValid() && styles.inputError]}
-              placeholder="example@gmail.com"
-              placeholderTextColor={COLORS.textMuted}
-              value={email}
-              onChangeText={setEmail}
-              autoCapitalize="none"
-              editable={!loading}
-            />
-            {validationActive && !isEmailValid() && (
-              <Text style={styles.errorText}>This email is incorrect!</Text>
-            )}
-          </View>
-
-          <View style={[styles.fieldBlock, { flex: 0.6, minWidth: 110 }]}>
+          <View style={[styles.fieldBlock, { flex: 0.5, minWidth: 110, maxWidth: 140 }]}>
             <Text style={styles.fieldLabel}>*Age:</Text>
             <View style={styles.spinnerContainer}>
               <TextInput
@@ -373,6 +365,40 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
                 </TouchableOpacity>
               </View>
             </View>
+          </View>
+        </View>
+
+        <View style={[styles.formRow, { zIndex: 1 }]}>
+          <View style={[styles.fieldBlock, { flex: 1, minWidth: 200 }]}>
+            <Text style={styles.fieldLabel}>*E-mail:</Text>
+            <TextInput
+              style={[styles.input, validationActive && !isEmailValid() && styles.inputError]}
+              placeholder="example@gmail.com"
+              placeholderTextColor={COLORS.textMuted}
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+              editable={!loading}
+            />
+            {validationActive && !isEmailValid() && (
+              <Text style={styles.errorText}>This email is incorrect!</Text>
+            )}
+          </View>
+
+          <View style={[styles.fieldBlock, { flex: 1, minWidth: 200 }]}>
+            <Text style={styles.fieldLabel}>*Phone Number:</Text>
+            <TextInput
+              style={[styles.input, validationActive && !isPhoneValid() && styles.inputError]}
+              placeholder="+40 700 000 000"
+              placeholderTextColor={COLORS.textMuted}
+              value={phone}
+              onChangeText={setPhone}
+              keyboardType="phone-pad"
+              editable={!loading}
+            />
+            {validationActive && !isPhoneValid() && (
+              <Text style={styles.errorText}>Please enter a valid phone number!</Text>
+            )}
           </View>
         </View>
 

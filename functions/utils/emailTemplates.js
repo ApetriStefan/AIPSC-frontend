@@ -52,9 +52,15 @@ export function buildConfirmationEmail({ from, to, userData }) {
               <p style="font-size: 16px; line-height: 160%; color: #091413; margin: 0 0 16px 0;">
                 Bună ziua, <strong>${userData.firstName} ${userData.lastName}</strong>,
               </p>
-              <p style="font-size: 15px; line-height: 160%; color: #374151; margin: 0 0 24px 0;">
+              <p style="font-size: 15px; line-height: 160%; color: #374151; margin: 0 0 20px 0;">
                 Vă mulțumim pentru înregistrarea la <strong>Cursul Oficial de Siguranță & Competiție IPSC (Certificare MISIA)</strong> din Zalău, România. Cererea dumneavoastră a fost recepționată cu succes.
               </p>
+
+              <div style="background-color: #EEF4F8; border-left: 4px solid #01223C; padding: 14px 18px; border-radius: 4px; margin-bottom: 24px;">
+                <p style="margin: 0; font-size: 14px; line-height: 150%; color: #01223C;">
+                  📞 <strong>Următorul pas:</strong> Veți fi contactat telefonic de către un reprezentant AIPSC la numărul indicat (<strong>${userData.phone || 'furnizat'}</strong>) pentru confirmarea înscrierii și stabilirea detaliilor organizatorice.
+                </p>
+              </div>
               
               <div style="background-color: #F4F5F4; border-left: 4px solid #BA9842; padding: 18px 20px; border-radius: 4px; margin-bottom: 26px;">
                 <p style="margin: 0 0 10px 0; font-size: 12px; font-weight: 700; color: #01223C; text-transform: uppercase; letter-spacing: 0.5px;">Sumarul înregistrării dumneavoastră:</p>
@@ -66,6 +72,10 @@ export function buildConfirmationEmail({ from, to, userData }) {
                   <tr>
                     <td style="color: #5E6B6A;">Email:</td>
                     <td style="font-weight: 600;">${userData.email}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #5E6B6A;">Telefon:</td>
+                    <td style="font-weight: 600;">${userData.phone || '—'}</td>
                   </tr>
                   <tr>
                     <td style="color: #5E6B6A;">Vârstă:</td>
@@ -83,13 +93,13 @@ export function buildConfirmationEmail({ from, to, userData }) {
               </div>
 
               <p style="font-size: 14px; line-height: 160%; color: #5E6B6A; margin: 0 0 16px 0; background-color: #F9FAFB; padding: 12px 16px; border-radius: 4px; border: 1px solid #E5E7EB;">
-                <em>Notă: Acest mesaj este trimis automat și nu permite răspuns direct (no-reply).</em>
+                <em>Notă: Acest mesaj este trimis automat și nu permite răspuns direct prin email (no-reply).</em>
               </p>
 
               <div style="background-color: #01223C; border-radius: 6px; padding: 20px 24px; margin-top: 24px; color: #FFFFFF;">
                 <p style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #BA9842;">Aveți întrebări sau asistență?</p>
                 <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 150%; color: #E2E8F0;">
-                  Puteți contacta direct un reprezentant al echipei noastre prin WhatsApp sau apel telefonic:
+                  Dacă doriți să luați legătura cu noi înainte de apel, ne puteți contacta direct prin WhatsApp sau telefon:
                 </p>
                 <a href="https://wa.me/40745629065" style="display: inline-block; background-color: #25D366; color: #091413; font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 4px; text-decoration: none; margin-right: 12px; margin-bottom: 8px;">
                   💬 WhatsApp: +40 745 629 065
@@ -129,7 +139,7 @@ export function buildConfirmationEmail({ from, to, userData }) {
 }
 
 export function buildAdminNotificationEmail({ from, to, userData, pdfBytes }) {
-  const subject = `[Înregistrare Nouă Curs] ${userData.lastName} ${userData.firstName} - ${userData.equipment}`;
+  const subject = `[Înregistrare Nouă Curs] ${userData.lastName} ${userData.firstName} (${userData.phone || ''}) - ${userData.equipment}`;
   const encodedSubject = `=?UTF-8?B?${toBase64(subject)}?=`;
   const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).substring(2)}`;
   const pdfFilename = `Inregistrare_${userData.lastName}_${userData.firstName}.pdf`.replace(/[^a-zA-Z0-9._-]/g, '_');
@@ -148,8 +158,9 @@ export function buildAdminNotificationEmail({ from, to, userData, pdfBytes }) {
   <table cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 520px; font-size: 14px; border: 1px solid #CDD7D6; border-radius: 4px;">
     <tr style="background: #F4F5F4;"><td style="font-weight: bold; width: 40%; border-bottom: 1px solid #E5E7EB;">Nume complet:</td><td style="border-bottom: 1px solid #E5E7EB;">${userData.firstName} ${userData.lastName}</td></tr>
     <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Email:</td><td style="border-bottom: 1px solid #E5E7EB;"><a href="mailto:${userData.email}">${userData.email}</a></td></tr>
-    <tr style="background: #F4F5F4;"><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Vârstă:</td><td style="border-bottom: 1px solid #E5E7EB;">${userData.age} ani</td></tr>
-    <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Echipament:</td><td style="border-bottom: 1px solid #E5E7EB;"><strong>${userData.equipment}</strong></td></tr>
+    <tr style="background: #F4F5F4;"><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Telefon:</td><td style="border-bottom: 1px solid #E5E7EB;"><a href="tel:${userData.phone}">${userData.phone || '—'}</a></td></tr>
+    <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Vârstă:</td><td style="border-bottom: 1px solid #E5E7EB;">${userData.age} ani</td></tr>
+    <tr style="background: #F4F5F4;"><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Echipament:</td><td style="border-bottom: 1px solid #E5E7EB;"><strong>${userData.equipment}</strong></td></tr>
     <tr><td style="font-weight: bold; border-bottom: 1px solid #E5E7EB;">Cazare Casa Romană:</td><td style="border-bottom: 1px solid #E5E7EB;">${accommodationText}</td></tr>
     <tr style="background: #F4F5F4;"><td style="font-weight: bold;">Data recepționării:</td><td>${new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' })}</td></tr>
   </table>

@@ -19,12 +19,12 @@ export async function onRequestOptions() {
 export async function onRequestPost({ request, env }) {
   try {
     const data = await request.json();
-    const { firstName, lastName, email, age, equipment, accommodation } = data;
+    const { firstName, lastName, email, phone, age, equipment, accommodation } = data;
 
     // Validate inputs
-    if (!firstName || !lastName || !email || !email.includes('@')) {
+    if (!firstName || !lastName || !email || !email.includes('@') || !phone) {
       return new Response(
-        JSON.stringify({ detail: 'Vă rugăm să completați toate câmpurile obligatorii (Nume, Prenume, Email valid).' }),
+        JSON.stringify({ detail: 'Vă rugăm să completați toate câmpurile obligatorii (Nume, Prenume, Email valid, Telefon).' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -49,6 +49,7 @@ export async function onRequestPost({ request, env }) {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       email: email.trim().toLowerCase(),
+      phone: phone.trim(),
       age: Number(age) || 18,
       equipment: equipment || 'Owned/Personal',
       accommodation: Boolean(accommodation),
