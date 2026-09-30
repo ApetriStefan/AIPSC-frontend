@@ -74,13 +74,13 @@ export async function generateRegistrationPdf(data) {
   });
 
   page.drawText('COURSE:', { x: 64, y: metaY + 44, size: 9, font: helveticaBold, color: cMuted });
-  page.drawText('IPSC Safety & Competition Course (MISIA Certification)', { x: 125, y: metaY + 44, size: 10, font: helveticaBold, color: cDark });
+  page.drawText('IPSC Safety & Competition Course (MISIA Certification)', { x: 145, y: metaY + 44, size: 10, font: helveticaBold, color: cDark });
 
   page.drawText('LOCATION:', { x: 64, y: metaY + 26, size: 9, font: helveticaBold, color: cMuted });
-  page.drawText('Zalau, Salaj, Romania', { x: 125, y: metaY + 26, size: 9, font: helvetica, color: cDark });
+  page.drawText('Zalau, Salaj, Romania', { x: 145, y: metaY + 26, size: 9, font: helvetica, color: cDark });
 
   page.drawText('SUBMITTED:', { x: 64, y: metaY + 10, size: 9, font: helveticaBold, color: cMuted });
-  page.drawText(data.submittedAt || new Date().toUTCString(), { x: 125, y: metaY + 10, size: 9, font: helvetica, color: cDark });
+  page.drawText(data.submittedAt || new Date().toUTCString(), { x: 145, y: metaY + 10, size: 9, font: helvetica, color: cDark });
 
   // Section 1: Participant Information
   let currentY = metaY - 35;
@@ -131,7 +131,7 @@ export async function generateRegistrationPdf(data) {
     });
 
     page.drawText(String(row.value), {
-      x: 230,
+      x: 245,
       y: rowY,
       size: 10,
       font: helvetica,
@@ -165,7 +165,7 @@ export async function generateRegistrationPdf(data) {
       value: data.equipment || 'Not specified' 
     },
     { 
-      label: 'Hotel Casa Romana Accommodation:', 
+      label: 'Hotel Accommodation:', 
       value: data.accommodation === true || data.accommodation === 'yes' 
         ? 'YES - Participant requested hotel reservation' 
         : 'NO - Participant will arrange own accommodation' 
@@ -195,7 +195,7 @@ export async function generateRegistrationPdf(data) {
     });
 
     page.drawText(String(row.value), {
-      x: 230,
+      x: 245,
       y: rowY,
       size: 10,
       font: helvetica,
