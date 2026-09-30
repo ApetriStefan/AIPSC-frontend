@@ -49,7 +49,7 @@ export async function onRequestPost({ request, env }) {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       email: email.trim().toLowerCase(),
-      age: Number(age) || 45,
+      age: Number(age) || 18,
       experience: Number(experience) || 0,
       equipment: equipment || 'Airsoft or real gun?',
       accommodation: Boolean(accommodation),

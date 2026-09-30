@@ -346,7 +346,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             <Text style={styles.fieldLabel}>*First Name:</Text>
             <TextInput
               style={[styles.input, validationActive && !firstName && styles.inputError]}
-              placeholder="Ciprian"
+              placeholder="name"
               placeholderTextColor={COLORS.textMuted}
               value={firstName}
               onChangeText={setFirstName}
@@ -358,7 +358,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             <Text style={styles.fieldLabel}>*Last Name:</Text>
             <TextInput
               style={[styles.input, validationActive && !lastName && styles.inputError]}
-              placeholder="Cipri"
+              placeholder="lastname"
               placeholderTextColor={COLORS.textMuted}
               value={lastName}
               onChangeText={setLastName}
@@ -370,7 +370,7 @@ export function AmbassadorDrawer({ visible, onClose, onOpenPolicy }) {
             <Text style={styles.fieldLabel}>*E-mail:</Text>
             <TextInput
               style={[styles.input, validationActive && !isEmailValid() && styles.inputError]}
-              placeholder="ciprian.cipri@gmail.com"
+              placeholder="example@gmail.com"
               placeholderTextColor={COLORS.textMuted}
               value={email}
               onChangeText={setEmail}
