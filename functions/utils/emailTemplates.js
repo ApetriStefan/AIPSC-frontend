@@ -97,7 +97,7 @@ export function buildConfirmationEmail({ from, to, userData }) {
               </p>
 
               <div style="background-color: #01223C; border-radius: 6px; padding: 20px 24px; margin-top: 24px; color: #FFFFFF;">
-                <p style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #BA9842;">Aveți întrebări sau asistență?</p>
+                <p style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #BA9842;">Aveți întrebări sau nevoie de asistență?</p>
                 <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 150%; color: #E2E8F0;">
                   Dacă doriți să luați legătura cu noi înainte de apel, ne puteți contacta direct prin WhatsApp sau telefon:
                 </p>
