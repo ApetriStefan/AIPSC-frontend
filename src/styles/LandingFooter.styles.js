@@ -50,6 +50,17 @@ export const styles = StyleSheet.create({
     color: COLORS.gold,
     fontWeight: '500',
   },
+  phoneContactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 8,
+  },
+  whatsappIconBtn: {
+    padding: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   bottomBar: {
     borderTopWidth: 1,
     borderTopColor: COLORS.steelNavy,

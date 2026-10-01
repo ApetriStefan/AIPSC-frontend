@@ -214,7 +214,12 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
   };
 
   const handleCall = () => {
-    Linking.openURL('tel:+40745629065');
+    const url = 'tel:+40745629065';
+    if (Platform.OS === 'web' && typeof window !== 'undefined') {
+      window.location.href = url;
+    } else {
+      Linking.openURL(url);
+    }
   };
 
   const handleReset = () => {
@@ -298,8 +303,12 @@ export function RegisterDrawer({ visible, onClose, onOpenPolicy }) {
           <Text style={styles.successFooterLink}>contact@aipsc.ro</Text>
         </TouchableOpacity>
         <Text style={styles.successFooterSeparator}>|</Text>
+        <TouchableOpacity onPress={handleCall} activeOpacity={0.8}>
+          <Text style={styles.successFooterLink}>Tel: +40 745 629 065</Text>
+        </TouchableOpacity>
+        <Text style={styles.successFooterSeparator}>|</Text>
         <TouchableOpacity onPress={handleWhatsApp} activeOpacity={0.8}>
-          <Text style={styles.successFooterLink}>WhatsApp: +40 745 629 065</Text>
+          <Text style={styles.successFooterLink}>WhatsApp</Text>
         </TouchableOpacity>
       </View>
     </View>

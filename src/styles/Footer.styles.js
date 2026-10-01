@@ -144,6 +144,18 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     fontWeight: '500',
   },
+  phoneContactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 8,
+  },
+  whatsappIconBtn: {
+    padding: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
   colTitle: {
     fontFamily: FONTS.sansSerif,
     fontSize: 16,
@@ -371,6 +383,12 @@ export const styles = StyleSheet.create({
     color: COLORS.gold,
     marginBottom: 8,
     fontWeight: '500',
+  },
+  mobilePhoneContactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 8,
   },
   mobileColTitle: {
     fontFamily: FONTS.sansSerif,
